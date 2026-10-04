@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>เงิน 4 ก้อน</title>
+<meta name="theme-color" content="#F6F4FA">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="เงิน 4 ก้อน">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Mitr:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ================= TOKENS: pastel card style, light + dark ================= */
+:root {
+  --font-b: 'Anuphan', 'Sarabun', 'Noto Sans Thai', 'Leelawadee UI', system-ui, sans-serif;
+  --font-d: 'Mitr', 'Anuphan', system-ui, sans-serif;
+  --r: 18px; --r-lg: 26px;
+  --bg: #F6F4FA; --surface: #FFFFFF; --surface2: #F2EFF8; --ink: #3B3650; --muted: #7F7996; --line: #E9E5F1;
+  /* deep = text/strokes, -f = pastel fills */
+  --need: #3E9479;   --need-f: #B6E3D3;
+  --card: #C95F5A;   --card-f: #F7C4C0;
+  --save: #A87C2A;   --save-f: #F6DDAA;
+  --invest: #6F63C9; --invest-f: #D3CDF5;
+  --income: #3E9479; --income-f: #B6E3D3;
+  --accent: #7A6FD6; --accent-ink: #FFFFFF; --accent-soft: #E7E3FB;
+  --warn-bg: #FCE9E7; --warn-ink: #A94C47;
+  --hero-bg: #E7E3FB; --hero-ink: #3B3650; --hero-muted: #6E6790;
+  --glass: #FBFAFE;
+  --shadow: 0 4px 18px rgba(80,70,130,.07); --nav: rgba(255,255,255,.93);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1B1A24; --surface: #252332; --surface2: #2C2A3B; --ink: #ECE9F5; --muted: #A6A0BE; --line: #363347;
+    --need: #8FD6BD;   --need-f: #5E9E89;
+    --card: #F2A7A2;   --card-f: #A8645F;
+    --save: #EDCB8A;   --save-f: #A5864D;
+    --invest: #B5ACF2; --invest-f: #736AAE;
+    --income: #8FD6BD; --income-f: #5E9E89;
+    --accent: #A79DF0; --accent-ink: #1B1A24; --accent-soft: #3A3654;
+    --warn-bg: #3F2A2E; --warn-ink: #F5B6B1;
+    --hero-bg: #322E48; --hero-ink: #ECE9F5; --hero-muted: #B7B0D4;
+    --glass: #211F2C;
+    --shadow: none; --nav: rgba(37,35,50,.94);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1B1A24; --surface: #252332; --surface2: #2C2A3B; --ink: #ECE9F5; --muted: #A6A0BE; --line: #363347;
+  --need: #8FD6BD;   --need-f: #5E9E89;
+  --card: #F2A7A2;   --card-f: #A8645F;
+  --save: #EDCB8A;   --save-f: #A5864D;
+  --invest: #B5ACF2; --invest-f: #736AAE;
+  --income: #8FD6BD; --income-f: #5E9E89;
+  --accent: #A79DF0; --accent-ink: #1B1A24; --accent-soft: #3A3654;
+  --warn-bg: #3F2A2E; --warn-ink: #F5B6B1;
+  --hero-bg: #322E48; --hero-ink: #ECE9F5; --hero-muted: #B7B0D4;
+  --glass: #211F2C;
+  --shadow: none; --nav: rgba(37,35,50,.94);
+}
+
+/* ================= BASE ================= */
+:root { box-sizing: border-box; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+*, *::before, *::after { box-sizing: inherit; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-b); font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.num { font-variant-numeric: tabular-nums; }
+.wrap { max-width: 540px; margin: 0 auto; padding: 0 18px calc(150px + env(safe-area-inset-bottom, 0px)); }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+h2.title { font-family: var(--font-d); font-size: 22px; font-weight: 500; margin: 8px 0 14px; }
+.sec-h { display: flex; justify-content: space-between; align-items: baseline; margin: 22px 0 8px; }
+.sec-h h3 { margin: 0; font-size: 16px; font-weight: 600; font-family: var(--font-d); font-weight: 500; }
+.link { background: none; border: 0; color: var(--accent); font-size: 14px; padding: 4px 0; }
+
+.seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; background: var(--surface2); border-radius: 14px; padding: 4px; }
+.seg button { border: 0; background: none; border-radius: 11px; padding: 8px 6px; font-size: 14px; color: var(--muted); white-space: nowrap; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); font-weight: 600; box-shadow: var(--shadow); }
+
+/* header */
+header.top { display: flex; align-items: center; justify-content: space-between; padding: 14px 0 4px; }
+.monthnav { display: flex; align-items: center; gap: 2px; }
+.monthnav button { background: none; border: 0; width: 36px; height: 36px; border-radius: 50%; font-size: 22px; color: var(--muted); }
+.monthnav button:hover { background: var(--surface2); }
+.monthnav h1 { margin: 0; font-size: 16px; font-weight: 500; min-width: 118px; text-align: center; font-family: var(--font-d); }
+.iconbtn { background: var(--surface); border: 0; border-radius: 12px; height: 36px; padding: 0 14px; color: var(--muted); font-size: 14px; box-shadow: var(--shadow); }
+
+/* hero */
+.hero { background: var(--hero-bg); color: var(--hero-ink); border-radius: var(--r-lg); padding: 22px 22px 20px; margin-top: 12px; }
+.hero .label { color: var(--hero-muted); font-size: 15px; }
+.hero .big { font-family: var(--font-d); font-size: clamp(42px, 13vw, 58px); font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; }
+.hero .big.neg { color: var(--card); }
+.hero .sub { display: flex; gap: 20px; margin-top: 6px; font-size: 14px; color: var(--hero-muted); flex-wrap: wrap; }
+.hero .sub b { color: var(--hero-ink); font-weight: 600; }
+
+/* ---------- jars inside a card ---------- */
+.jarcard { background: var(--surface); border-radius: var(--r-lg); padding: 18px 12px 14px; margin-top: 14px; box-shadow: var(--shadow); }
+.jars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.jar { display: flex; flex-direction: column; align-items: center; text-align: center; background: none; border: 0; padding: 0; border-radius: 14px; }
+.vessel { position: relative; width: 100%; max-width: 72px; height: 132px; margin-top: 8px; border: 2px solid color-mix(in srgb, var(--c) 45%, transparent); border-radius: 14px 14px 24px 24px; overflow: hidden; background: var(--glass); }
+.vessel::before { content: ''; position: absolute; top: -2px; left: 20%; right: 20%; height: 8px; background: var(--surface); border: 2px solid color-mix(in srgb, var(--c) 45%, transparent); border-top: 0; border-radius: 0 0 7px 7px; z-index: 2; }
+.fill { position: absolute; left: 0; right: 0; bottom: 0; background: var(--f); transition: height .7s cubic-bezier(.3,.7,.2,1); }
+.fill::before { /* gentle surface wave */
+  content: ''; position: absolute; left: -10%; right: -10%; top: -5px; height: 10px; border-radius: 50%; background: var(--f); filter: brightness(1.06);
+}
+.vessel .pct { position: absolute; inset: auto 0 10px; font-size: 13px; font-weight: 600; color: var(--c); z-index: 1; }
+:root[data-theme="dark"] .vessel .pct { color: #fff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .vessel .pct { color: #fff; } }
+.vessel.low .pct { inset: 16px 0 auto; color: var(--c); }
+.jar.over .vessel { border-style: dashed; border-color: var(--card); }
+.jar .name { font-size: 14px; font-weight: 600; margin-top: 8px; }
+.jar .rem { font-size: 13px; color: var(--c); font-weight: 600; }
+.jar .used { font-size: 12px; color: var(--muted); }
+.jar.over .rem { color: var(--card); }
+.viz-note { font-size: 12.5px; color: var(--muted); text-align: center; margin: 12px 0 0; }
+@media (prefers-reduced-motion: reduce) { .fill { transition: none; } }
+
+.alerts { display: grid; gap: 8px; margin-top: 12px; }
+.alert { background: var(--warn-bg); color: var(--warn-ink); border-radius: 14px; padding: 10px 14px; font-size: 14px; }
+
+/* mini cards */
+.minis { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+.mini { text-align: left; background: var(--surface); border: 0; border-radius: var(--r); padding: 14px 16px; box-shadow: var(--shadow); }
+.mini .k { font-size: 13px; color: var(--muted); }
+.mini .v { font-family: var(--font-d); font-size: 20px; font-weight: 500; }
+.mini .s { font-size: 12px; color: var(--muted); }
+.bar { height: 8px; background: var(--surface2); border-radius: 8px; overflow: hidden; margin-top: 6px; }
+.bar span { display: block; height: 100%; background: var(--f, var(--accent-soft)); border-radius: inherit; }
+
+/* list */
+.day { margin-bottom: 12px; }
+.day-head { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); padding: 0 4px 4px; }
+.rows { background: var(--surface); border-radius: var(--r); box-shadow: var(--shadow); overflow: hidden; }
+.row-wrap + .row-wrap { border-top: 1px solid var(--line); }
+.row { display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: center; padding: 10px 14px; width: 100%; background: none; border: 0; text-align: left; }
+.badge { width: 34px; height: 34px; border-radius: 12px; background: var(--f); display: grid; place-items: center; color: var(--c); font-size: 13px; font-weight: 600; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--f, var(--muted)); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--c, var(--muted)) 60%, transparent); display: inline-block; flex: none; }
+.row .cat { font-weight: 500; display: block; }
+.row .note { font-size: 13px; color: var(--muted); display: block; }
+.row .amt { font-weight: 600; }
+.row .amt.inc { color: var(--income); }
+.row-actions { display: none; padding: 0 14px 12px 60px; gap: 8px; }
+.row-wrap.open .row-actions { display: flex; }
+.btn-del { background: var(--warn-bg); border: 0; color: var(--warn-ink); border-radius: 12px; padding: 7px 14px; font-size: 14px; }
+.empty { text-align: center; color: var(--muted); padding: 28px 12px; background: var(--surface); border-radius: var(--r); }
+
+/* search */
+.search { position: relative; }
+.search input { width: 100%; border: 0; background: var(--surface); border-radius: var(--r); padding: 12px 14px 12px 42px; font-size: 16px; box-shadow: var(--shadow); }
+.search svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+.filters { display: flex; gap: 8px; overflow-x: auto; padding: 10px 0 4px; scrollbar-width: none; }
+.filters::-webkit-scrollbar { display: none; }
+.fchip { flex: none; border: 0; background: var(--surface); border-radius: 999px; padding: 6px 13px; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; box-shadow: var(--shadow); }
+.fchip[aria-pressed="true"] { background: var(--accent-soft); color: var(--ink); font-weight: 600; box-shadow: inset 0 0 0 1.5px var(--accent); }
+.fsep { flex: none; width: 1px; background: var(--line); margin: 4px 2px; }
+.result-sum { display: flex; justify-content: space-between; font-size: 14px; color: var(--muted); margin: 8px 4px 12px; }
+.result-sum b { color: var(--ink); }
+
+/* stats */
+.card { background: var(--surface); border-radius: var(--r-lg); padding: 18px; box-shadow: var(--shadow); margin-bottom: 14px; }
+.card h4 { margin: 0 0 4px; font-size: 16px; font-weight: 500; font-family: var(--font-d); }
+.chart { width: 100%; height: auto; display: block; margin-top: 8px; }
+.chart text { font-family: var(--font-b); fill: var(--muted); font-size: 11px; }
+.chart .sel text { fill: var(--ink); font-weight: 600; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--muted); margin-top: 8px; }
+.legend span { display: inline-flex; align-items: center; gap: 5px; }
+.legend .ol { width: 10px; height: 10px; border: 1.5px dashed var(--muted); border-radius: 3px; display: inline-block; }
+.kv { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; text-align: center; }
+.kv div { background: var(--surface2); border-radius: 14px; padding: 8px 4px; }
+.kv .k { font-size: 12px; color: var(--muted); }
+.kv .v { font-weight: 500; font-family: var(--font-d); }
+.stack { display: flex; height: 14px; border-radius: 8px; overflow: hidden; margin-top: 12px; background: var(--surface2); gap: 2px; }
+.stack span { background: var(--f); }
+.insights { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.insights li { display: grid; grid-template-columns: 28px 1fr; gap: 8px; font-size: 14px; }
+.insights .ic { font-size: 18px; line-height: 1.3; }
+.rank { display: grid; gap: 10px; margin-top: 8px; }
+.rank .rl { display: flex; justify-content: space-between; font-size: 14px; }
+
+/* debts & goals */
+.item { width: 100%; text-align: left; display: block; background: var(--surface); border: 0; border-radius: var(--r-lg); padding: 16px 18px; margin-bottom: 12px; box-shadow: var(--shadow); }
+.item .top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.item .name { font-weight: 600; }
+.item .amt { font-family: var(--font-d); font-weight: 500; font-size: 21px; }
+.item .bar { height: 10px; margin: 10px 0 8px; }
+.item .foot { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); gap: 10px; }
+.item .foot.col { flex-direction: column; gap: 0; }
+.tag { font-size: 12px; padding: 2px 10px; border-radius: 999px; background: var(--surface2); color: var(--muted); white-space: nowrap; }
+.tag.good { background: var(--need-f); color: var(--ink); }
+.tag.bad { background: var(--warn-bg); color: var(--warn-ink); }
+.addline { width: 100%; border: 2px dashed var(--line); background: none; border-radius: var(--r-lg); padding: 14px; color: var(--muted); font-size: 15px; }
+.summary-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+
+/* bottom nav + fab */
+nav.tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 6; background: var(--nav); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom, 0px); }
+nav.tabs .in { max-width: 540px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); }
+nav.tabs button { background: none; border: 0; padding: 8px 0 7px; display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 11.5px; color: var(--muted); }
+nav.tabs button svg { padding: 2px 12px; box-sizing: content-box; border-radius: 12px; }
+nav.tabs button[aria-current="page"] { color: var(--ink); font-weight: 600; }
+nav.tabs button[aria-current="page"] svg { background: var(--accent-soft); }
+nav.tabs svg { width: 22px; height: 22px; }
+nav.tabs button.center { padding-top: 0; color: var(--accent); font-weight: 600; }
+nav.tabs .orb {
+  width: 60px; height: 60px; margin-top: -24px; border-radius: 22px; display: grid; place-items: center;
+  background: var(--accent); color: var(--accent-ink); border: 4px solid var(--bg);
+  box-shadow: 0 10px 22px rgba(122,111,214,.38); transition: transform .15s;
+}
+nav.tabs .orb svg { width: 28px; height: 28px; padding: 0; background: none !important; }
+nav.tabs button.center:active .orb { transform: scale(.94); }
+nav.tabs button.center[aria-current="page"] .orb { box-shadow: 0 0 0 3px var(--accent-soft), 0 10px 22px rgba(122,111,214,.38); }
+nav.tabs button.center[aria-current="page"] { color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { nav.tabs .orb { transition: none; } }
+.fab { display: none !important; }
+.fab-old { position: fixed; right: max(18px, calc(50% - 252px)); bottom: calc(80px + env(safe-area-inset-bottom, 0px)); z-index: 7; width: 58px; height: 58px; border-radius: 20px; border: 0; background: var(--accent); color: var(--accent-ink); font-size: 30px; line-height: 1; box-shadow: 0 8px 22px rgba(122,111,214,.35); }
+
+/* sheets */
+.scrim { position: fixed; inset: 0; background: rgba(30,26,50,.35); opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 10; }
+.scrim.open { opacity: 1; pointer-events: auto; }
+.sheet { position: fixed; left: 0; right: 0; bottom: 0; max-height: 92%; overflow-y: auto; z-index: 11; background: var(--surface); border-radius: var(--r-lg) var(--r-lg) 0 0; padding: 10px 18px calc(22px + env(safe-area-inset-bottom, 0px)); transform: translateY(105%); transition: transform .28s cubic-bezier(.3,.7,.2,1); max-width: 560px; margin: 0 auto; }
+.sheet.open { transform: none; }
+@media (prefers-reduced-motion: reduce) { .sheet, .scrim { transition: none; } }
+.grab { width: 40px; height: 4px; border-radius: 4px; background: var(--line); margin: 0 auto 12px; }
+.sheet h3 { margin: 0 0 12px; font-size: 19px; font-family: var(--font-d); font-weight: 500; }
+.sheet .seg { margin-bottom: 14px; }
+.amount-in { width: 100%; border: 0; border-bottom: 2px solid var(--line); background: none; font-family: var(--font-d); font-size: 40px; font-weight: 500; padding: 4px 0; margin-bottom: 6px; }
+.amount-in:focus { outline: none; border-bottom-color: var(--accent); }
+.group-label { font-size: 13px; color: var(--muted); margin: 12px 0 6px; display: flex; align-items: center; gap: 6px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 0; background: var(--surface2); border-radius: 999px; padding: 7px 13px; font-size: 14px; }
+.chip[aria-pressed="true"] { background: var(--f, var(--accent-soft)); color: var(--ink); font-weight: 600; box-shadow: inset 0 0 0 1.5px var(--c, var(--accent)); }
+.field { display: grid; gap: 4px; margin-top: 12px; font-size: 14px; color: var(--muted); }
+.field input, .field select { border: 0; background: var(--surface2); border-radius: 12px; padding: 10px 12px; font-size: 16px; color: var(--ink); width: 100%; min-height: 44px; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.primary { width: 100%; margin-top: 18px; border: 0; border-radius: 16px; padding: 14px; font-size: 17px; font-weight: 600; background: var(--accent); color: var(--accent-ink); }
+.primary:disabled { opacity: .45; }
+.secondary { width: 100%; margin-top: 10px; border: 0; border-radius: 16px; padding: 12px; background: var(--surface2); font-size: 15px; }
+.danger { background: var(--warn-bg); color: var(--warn-ink); }
+.hint { font-size: 13px; color: var(--muted); margin: 6px 0 0; }
+.ratios { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.ratios label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+.ratios input { border: 0; background: var(--surface2); border-radius: 12px; padding: 8px; font-size: 16px; width: 100%; text-align: center; color: var(--ink); }
+.section-title { font-size: 15px; font-weight: 600; margin: 20px 0 6px; }
+
+.toast { position: fixed; left: 50%; top: calc(14px + env(safe-area-inset-top, 0px)); transform: translate(-50%, -160%); background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: 14px; font-size: 15px; z-index: 20; transition: transform .25s; max-width: 90%; text-align: center; white-space: pre-line; }
+.toast.show { transform: translate(-50%, 0); }
+[hidden] { display: none !important; }
+/* sync status */
+.topright { display: flex; gap: 8px; align-items: center; }
+.iconbtn.gear { width: 36px; padding: 0; display: grid; place-items: center; }
+.syncchip { white-space: nowrap; border: 0; background: var(--surface); box-shadow: var(--shadow); border-radius: 12px; height: 36px; padding: 0 12px; font-size: 13px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+.syncchip i { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); display: inline-block; }
+.syncchip.ok i { background: var(--need); } .syncchip.busy i { background: var(--save); } .syncchip.off i, .syncchip.err i { background: var(--card); }
+.syncchip.demo { background: var(--save-f); color: var(--ink); }
+.modebox { background: var(--surface2); border-radius: 16px; padding: 12px 14px; font-size: 14px; display: grid; gap: 4px; }
+.modebox b { font-family: var(--font-d); font-weight: 500; }
+/* chat logger */
+.chatlog { display: grid; gap: 10px; padding: 6px 0 12px; }
+.chatday { justify-self: center; font-size: 12px; color: var(--muted); background: var(--surface2); border-radius: 999px; padding: 2px 12px; margin: 6px 0 2px; }
+.bubble { max-width: 86%; padding: 10px 14px; border-radius: 18px; font-size: 15px; line-height: 1.55; overflow-wrap: anywhere; white-space: pre-wrap; }
+.bubble.me { justify-self: end; background: var(--accent); color: var(--accent-ink); border-bottom-right-radius: 6px; }
+.bubble.bot { justify-self: start; background: var(--surface); border-bottom-left-radius: 6px; box-shadow: var(--shadow); white-space: normal; }
+.bubble.bot ul { margin: 4px 0; padding-left: 18px; }
+.bubble .time { display: block; font-size: 11px; opacity: .7; margin-top: 2px; text-align: right; }
+.bubble.err { background: var(--warn-bg); color: var(--warn-ink); }
+.draft { justify-self: stretch; max-width: 100%; background: var(--surface); border-radius: 20px; padding: 14px; box-shadow: var(--shadow); }
+.draft .dh { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; margin-bottom: 6px; }
+.draft .dh b { font-family: var(--font-d); font-weight: 500; font-size: 15px; }
+.ditem { display: grid; grid-template-columns: 30px 1fr 88px 28px; gap: 8px; align-items: center; padding: 8px 0; border-top: 1px solid var(--line); }
+.ditem:first-of-type { border-top: 0; }
+.ditem .badge { width: 30px; height: 30px; border-radius: 10px; font-size: 12px; }
+.ditem select, .ditem input { border: 0; background: var(--surface2); border-radius: 10px; padding: 7px 8px; font-size: 14px; color: var(--ink); width: 100%; min-width: 0; min-height: 36px; }
+.ditem input { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+.ditem .sub { grid-column: 2 / 4; display: flex; gap: 6px; align-items: center; }
+.ditem .sub select { flex: 1; font-size: 13px; min-height: 32px; padding: 5px 8px; }
+.ditem .sub .d { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.ditem .x { border: 0; background: none; color: var(--muted); font-size: 18px; width: 28px; height: 28px; border-radius: 8px; }
+.ditem.saved { grid-template-columns: 30px 1fr auto; }
+.ditem.saved .nm { font-size: 14px; }
+.ditem.saved .nm small { display: block; color: var(--muted); font-size: 12px; }
+.ditem.saved .am { font-weight: 600; font-variant-numeric: tabular-nums; }
+.draft .foot2 { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; gap: 10px; }
+.draft .foot2 .tot { font-size: 14px; color: var(--muted); }
+.draft .foot2 .tot b { color: var(--ink); }
+.draft .go { border: 0; background: var(--accent); color: var(--accent-ink); border-radius: 14px; padding: 10px 18px; font-weight: 600; font-size: 15px; }
+.draft .ghost { border: 0; background: var(--surface2); color: var(--ink); border-radius: 14px; padding: 9px 14px; font-size: 14px; }
+.draft .after { margin-top: 10px; font-size: 13px; color: var(--muted); display: grid; gap: 2px; }
+.draft.undone { opacity: .55; }
+.chatinput { position: fixed; left: 0; right: 0; bottom: calc(80px + env(safe-area-inset-bottom, 0px)); z-index: 6; background: linear-gradient(to top, var(--bg) 72%, transparent); padding: 14px 14px 10px; }
+.chatinput .in { max-width: 512px; margin: 0 auto; }
+.chatinput .row2 { display: grid; grid-template-columns: auto 1fr auto; gap: 6px; align-items: end; background: var(--surface); border-radius: 24px; padding: 5px; box-shadow: 0 6px 22px rgba(80,70,130,.12); }
+.chatinput textarea { border: 0; background: none; padding: 10px 6px; font: inherit; font-size: 16px; color: var(--ink); resize: none; min-height: 44px; max-height: 140px; outline: none; }
+.chatinput .send { width: 44px; height: 44px; border: 0; border-radius: 18px; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; transition: opacity .15s; }
+.chatinput .send:disabled { opacity: .35; }
+.chatinput .formbtn { width: 44px; height: 44px; border: 0; border-radius: 18px; background: var(--surface2); color: var(--muted); display: grid; place-items: center; }
+.typing { display: inline-flex; gap: 4px; align-items: center; padding: 4px 2px; }
+.typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); opacity: .4; animation: blink 1.2s infinite; }
+.typing i:nth-child(2) { animation-delay: .2s; } .typing i:nth-child(3) { animation-delay: .4s; }
+@keyframes blink { 0%, 80%, 100% { opacity: .25; transform: translateY(0); } 40% { opacity: .9; transform: translateY(-2px); } }
+@media (prefers-reduced-motion: reduce) { .typing i { animation: none; opacity: .6; } }
+.cstat { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 4; margin: 4px -18px 0; padding: 8px 18px 10px; background: var(--bg); }
+.cstat .box { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: center; background: var(--surface); border-radius: 20px; padding: 12px 14px; box-shadow: var(--shadow); width: 100%; border: 0; text-align: left; }
+.cstat .k { font-size: 12px; color: var(--muted); }
+.cstat .v { font-family: var(--font-d); font-size: 19px; font-weight: 500; line-height: 1.25; }
+.cstat .v.neg { color: var(--card); }
+.minijars { display: flex; gap: 4px; align-items: flex-end; height: 34px; }
+.minijars span { width: 9px; height: 100%; border-radius: 5px; background: var(--surface2); position: relative; overflow: hidden; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--c) 40%, transparent); }
+.minijars span i { position: absolute; left: 0; right: 0; bottom: 0; background: var(--f); }
+.minijars span.over { box-shadow: inset 0 0 0 1.5px var(--card); }
+.welcome { justify-self: stretch; max-width: 100%; background: var(--surface); border-radius: 22px; padding: 18px; box-shadow: var(--shadow); }
+.welcome .h { font-family: var(--font-d); font-size: 18px; font-weight: 500; }
+.welcome p { margin: 6px 0 12px; color: var(--muted); font-size: 14px; }
+.welcome .ex { display: grid; gap: 8px; }
+.welcome .ex button { text-align: left; border: 0; background: var(--accent-soft); color: var(--ink); border-radius: 14px; padding: 10px 14px; font-size: 14px; }
+.welcome .ex button small { display: block; color: var(--muted); font-size: 12px; }
+.chatinput .hints { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
+.chatinput .hints::-webkit-scrollbar { display: none; }
+.chatinput .hints .chip { flex: none; background: var(--surface); box-shadow: var(--shadow); font-size: 13px; }
+.mode { font-size: 12px; color: var(--muted); text-align: center; margin: 0 0 6px; }
+body.chatmode .wrap { padding-bottom: calc(230px + env(safe-area-inset-bottom, 0px)); }
+body.chatmode header.top { padding-bottom: 0; }
+.chatinput.typing-now .hints { display: none; }
+body.chatmode .fab { display: none; }
+.planseg { margin-bottom: 14px; }
+/* AI */
+.aicard { margin-top: 14px; background: var(--accent-soft); border-radius: var(--r-lg); padding: 16px 16px 14px; }
+.aicard .t { font-family: var(--font-d); font-weight: 500; font-size: 16px; }
+.aicard .d { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.aicard .chips { margin-top: 10px; }
+.aicard .chip { background: var(--surface); }
+.chat { display: grid; gap: 10px; max-height: 52vh; overflow-y: auto; padding: 4px 2px 8px; }
+.msg { max-width: 88%; padding: 10px 14px; border-radius: 18px; font-size: 15px; line-height: 1.6; overflow-wrap: anywhere; }
+.msg.user { justify-self: end; background: var(--accent-soft); border-bottom-right-radius: 6px; }
+.msg.ai { justify-self: start; background: var(--surface2); border-bottom-left-radius: 6px; }
+.msg.ai ul { margin: 4px 0; padding-left: 18px; }
+.msg.err { color: var(--warn-ink); background: var(--warn-bg); }
+.msg .thinking { color: var(--muted); }
+.chatbar { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin-top: 8px; align-items: end; }
+.chatbar textarea { border: 0; background: var(--surface2); border-radius: 16px; padding: 11px 14px; font: inherit; font-size: 16px; color: var(--ink); resize: none; min-height: 46px; max-height: 120px; }
+.chatbar button { height: 46px; min-width: 64px; border: 0; border-radius: 16px; background: var(--accent); color: var(--accent-ink); font-weight: 600; padding: 0 14px; }
+.chatbar button.stop { background: var(--surface2); color: var(--ink); }
+.ai-suggest { display: flex; gap: 8px; overflow-x: auto; padding: 2px 0 6px; scrollbar-width: none; }
+.ai-suggest::-webkit-scrollbar { display: none; }
+.ai-suggest .chip { flex: none; }
+.aiquick { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin-bottom: 12px; }
+.aiquick input { border: 0; background: var(--accent-soft); border-radius: 14px; padding: 10px 12px; font-size: 15px; color: var(--ink); min-width: 0; }
+.aiquick button { border: 0; border-radius: 14px; background: var(--accent); color: var(--accent-ink); padding: 0 14px; font-weight: 600; font-size: 14px; }
+.disclaimer { font-size: 12px; color: var(--muted); text-align: center; margin: 8px 0 0; }
+.paytag { display: inline-block; font-size: 12px; color: var(--muted); background: var(--surface2); border-radius: 6px; padding: 0 6px; margin-top: 2px; }
+.amt.xfer { color: var(--muted); font-weight: 500; }
+.hero .note { margin-top: 10px; font-size: 13px; color: var(--hero-muted); display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.infobox { background: var(--surface2); border-radius: 14px; padding: 12px 14px; margin-top: 10px; font-size: 14px; display: grid; gap: 4px; }
+.infobox .l { display: flex; justify-content: space-between; }
+.infobox .quick { justify-self: start; margin-top: 4px; border: 0; background: var(--card-f); color: var(--ink); border-radius: 10px; padding: 5px 12px; font-size: 13px; font-weight: 600; }
+.foot .strong { color: var(--ink); font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="monthnav" id="monthnav">
+      <button id="prevM" aria-label="เดือนก่อน">‹</button>
+      <h1 id="monthTitle">—</h1>
+      <button id="nextM" aria-label="เดือนถัดไป">›</button>
+    </div>
+    <div class="topright"><button class="syncchip" id="syncChip" aria-live="polite"></button><button class="iconbtn gear" id="openSettings" aria-label="ตั้งค่า"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button></div>
+  </header>
+  <main id="view"></main>
+</div>
+
+<button class="fab" id="openAdd" aria-label="บันทึกรายการ">+</button>
+
+<div class="chatinput" id="chatBar" hidden>
+  <div class="in">
+    <div class="hints" id="chatHints"></div>
+    <div class="row2">
+      <button class="formbtn" id="formBtn" aria-label="บันทึกแบบฟอร์ม" title="บันทึกแบบฟอร์ม"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></button>
+      <textarea id="chatText" rows="1" placeholder="วันนี้ใช้อะไรไปบ้าง…" aria-label="ข้อความ"></textarea>
+      <button class="send" id="chatSend" aria-label="ส่ง" disabled><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<nav class="tabs" aria-label="เมนูหลัก"><div class="in" id="tabs"></div></nav>
+
+<div class="scrim" id="scrim"></div>
+
+<!-- Add transaction -->
+<div class="sheet" id="addSheet" role="dialog" aria-modal="true" aria-labelledby="addTitle">
+  <div class="grab"></div>
+  <h3 id="addTitle">บันทึกรายการ</h3>
+  <div class="seg" role="group" aria-label="ประเภท">
+    <button id="tExpense" aria-pressed="true">รายจ่าย</button>
+    <button id="tIncome" aria-pressed="false">รายรับ</button>
+    <button id="tCardpay" aria-pressed="false">จ่ายบิลบัตร</button>
+  </div>
+  <div class="aiquick" id="aiQuick" hidden>
+    <input id="aiQuickText" placeholder="✨ พิมพ์บอก เช่น ข้าวมันไก่ 60 รูดกสิกร เมื่อวาน" aria-label="พิมพ์รายการให้ AI กรอกให้" autocomplete="off">
+    <button id="aiQuickBtn">กรอกให้</button>
+  </div>
+  <input class="amount-in num" id="amount" inputmode="decimal" placeholder="฿0" aria-label="จำนวนเงิน" autocomplete="off">
+  <div id="catPicker"></div>
+  <div id="payPicker"></div>
+  <div class="two">
+    <label class="field">วันที่<input type="date" id="date"></label>
+    <label class="field">โน้ต<input id="note" placeholder="เช่น ข้าวมันไก่" maxlength="200"></label>
+  </div>
+  <button class="primary" id="saveTx" disabled>บันทึก</button>
+</div>
+
+<!-- Generic form (debt / goal) -->
+<div class="sheet" id="formSheet" role="dialog" aria-modal="true" aria-labelledby="formTitle">
+  <div class="grab"></div>
+  <h3 id="formTitle"></h3>
+  <div id="formBody"></div>
+  <button class="primary" id="formSave">บันทึก</button>
+  <button class="secondary danger" id="formDelete" hidden>ลบ</button>
+</div>
+
+<!-- AI assistant -->
+<div class="sheet" id="aiSheet" role="dialog" aria-modal="true" aria-labelledby="aiTitle">
+  <div class="grab"></div>
+  <h3 id="aiTitle">✨ ผู้ช่วยการเงิน</h3>
+  <div class="ai-suggest" id="aiSuggest"></div>
+  <div class="chat" id="chat" aria-live="polite"></div>
+  <div class="chatbar">
+    <textarea id="aiInput" rows="1" placeholder="ถามเรื่องเงินเดือนนี้ได้เลย"></textarea>
+    <button id="aiSend">ส่ง</button>
+  </div>
+  <p class="disclaimer">AI ใช้ตัวเลขในแอปนี้ช่วยคิด ไม่ใช่คำแนะนำจากที่ปรึกษาการเงิน</p>
+</div>
+
+<!-- Settings -->
+<div class="sheet" id="setSheet" role="dialog" aria-modal="true" aria-labelledby="setTitle">
+  <div class="grab"></div>
+  <h3 id="setTitle">ตั้งค่า</h3>
+  <div class="section-title">โหมดสี</div>
+  <div class="seg" role="group" id="setTheme">
+    <button data-theme="auto">ตามเครื่อง</button><button data-theme="light">สว่าง</button><button data-theme="dark">มืด</button>
+  </div>
+  <div class="section-title">ที่เก็บข้อมูล</div>
+  <div class="modebox" id="modeBox"></div>
+  <label class="field">Web app URL (Google Apps Script)<input id="cfgUrl" placeholder="https://script.google.com/macros/s/…/exec" inputmode="url" autocomplete="off"></label>
+  <label class="field">API token<input id="cfgToken" placeholder="จาก Log ตอนรัน setup" autocomplete="off"></label>
+  <button class="primary" id="connectBtn">เชื่อมต่อ Google Sheet</button>
+  <button class="secondary" id="syncNowBtn" hidden>ซิงค์ตอนนี้</button>
+  <button class="secondary danger" id="disconnectBtn" hidden>เลิกเชื่อมต่อ</button>
+  <button class="secondary" id="startReal">ล้างข้อมูลตัวอย่าง เริ่มใช้จริงในเครื่องนี้</button>
+  <div class="section-title">ฐานงบประมาณ</div>
+  <label class="field">เงินเดือนฐาน (บาท)<input id="baseSalary" inputmode="numeric"></label>
+  <p class="hint">งบแต่ละก้อนคิดจากเงินเดือนฐาน บวกค่าคอมและเบี้ยเลี้ยงเฉลี่ย 3 เดือนก่อนหน้า ถ้ารายรับจริงเข้ามามากกว่านี้ จะใช้รายรับจริงแทน เงินที่เหลือตอนสิ้นเดือนไม่ยกไปเดือนถัดไป</p>
+  <p class="hint">ก้อนบัตรเครดิตรวมทุกอย่างที่เกี่ยวกับบัตร: ยอดรูด ค่างวดผ่อน และเงินที่จ่ายลดหนี้เก่า</p>
+  <div class="section-title">สัดส่วนการแบ่งรายได้</div>
+  <div class="ratios" id="ratioInputs"></div>
+  <p class="hint" id="ratioSum">รวม 100%</p>
+  <label class="field">เตือนเมื่อก้อนใดใช้ถึง (%)<input id="alertPct" inputmode="numeric" maxlength="3"></label>
+  <button class="primary" id="saveRatios">บันทึกงบประมาณ</button>
+  <div class="section-title">แอปบนมือถือ</div>
+  <button class="secondary" id="installBtn" hidden>ติดตั้งลงหน้าจอหลัก</button>
+  <p class="hint">iPhone: เปิดใน Safari กดปุ่มแชร์ แล้วเลือก “เพิ่มไปยังหน้าจอโฮม” ส่วน Android ใช้เมนู ⋮ ของ Chrome แล้วเลือก “ติดตั้งแอป”</p>
+  <button class="secondary" id="clearChat">ล้างประวัติแชท</button>
+  <button class="secondary" id="resetDemo">สร้างข้อมูลตัวอย่างใหม่</button>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ======================= constants ======================= */
+const BUCKETS = {
+  need:   { label: 'จำเป็น',     c: 'var(--need)',   f: 'var(--need-f)',   ic: '🏠' },
+  card:   { label: 'บัตรเครดิต', c: 'var(--card)',   f: 'var(--card-f)',   ic: '💳' },
+  save:   { label: 'ออมฉุกเฉิน',  c: 'var(--save)',   f: 'var(--save-f)',   ic: '🐷' },
+  invest: { label: 'ลงทุน',      c: 'var(--invest)', f: 'var(--invest-f)', ic: '🌱' },
+};
+const bc = k => k && BUCKETS[k] ? `--c:${BUCKETS[k].c};--f:${BUCKETS[k].f}` : '--c:var(--income);--f:var(--income-f)';
+const TH_M = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+const TH_MS = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const CATS = [
+  ['เงินเดือน','income',''],['ค่าคอมซ่อม','income',''],['ค่าคอมขาย','income',''],['ค่าเดินทาง+เบี้ยเลี้ยง','income',''],['รายได้อื่น','income',''],
+  ['ค่าอาหาร','expense','need'],['ค่าเดินทาง','expense','need'],['ค่าไฟบ้าน','expense','need'],['ค่าโทรศัพท์','expense','need'],
+  ['ค่าประกันสังคม','expense','need'],['ค่ากองทุน','expense','need'],['ค่าเปย์แฟน','expense','need'],['อื่นๆ','expense','need'],
+  ['ของใช้/ช้อปปิ้ง','expense','need'],
+  ['บัตรกดเงินสด กสิกร','expense','card'],['ผ่อน เฟิร์สช้อยส์','expense','card'],['ผ่อน Shopee','expense','card'],
+  ['เก็บออมระยะยาว','expense','save'],['เก็บพัฒนาตัวเอง','expense','save'],['เก็บเงินฉุกเฉิน','expense','save'],
+  ['ซื้อกองทุน','expense','invest'],['ซื้อหุ้น','expense','invest'],
+].map(([name, type, bucket]) => ({ name, type, bucket }));
+const COMMISSION = ['ค่าคอมซ่อม', 'ค่าคอมขาย'];
+const SALARY = 'เงินเดือน';
+const ICONS = {
+  home: '<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+  list: '<path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1"/><circle cx="3.5" cy="12" r="1"/><circle cx="3.5" cy="18" r="1"/>',
+  stats: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  debt: '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/>',
+  goal: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/>',
+  chat: '<path d="M21 12a8 8 0 0 1-11.7 7.1L4 20.5l1.3-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14h4"/>',
+  plan: '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/>',
+  search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
+};
+const TABS = [['home','ภาพรวม'],['list','รายการ'],['chat','แชท'],['stats','สถิติ'],['plan','หนี้/ออม']];
+
+/* ======================= helpers ======================= */
+const $ = id => document.getElementById(id);
+const pad = n => String(n).padStart(2, '0');
+const todayStr = () => { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; };
+const curMonth = () => todayStr().slice(0, 7);
+const money = n => (n < 0 ? '−฿' : '฿') + Math.abs(Math.round(n)).toLocaleString('th-TH');
+const kMoney = n => Math.abs(n) >= 1000 ? (n / 1000).toFixed(n % 1000 === 0 || Math.abs(n) >= 10000 ? 0 : 1) + 'k' : String(Math.round(n));
+const mTitle = m => { const [y, mo] = m.split('-').map(Number); return `${TH_M[mo-1]} ${y + 543}`; };
+const mShort = m => { const [y, mo] = m.split('-').map(Number); return `${TH_MS[mo-1]} ${String(y + 543).slice(2)}`; };
+const shiftM = (m, d) => { let [y, mo] = m.split('-').map(Number); mo += d; while (mo < 1) { mo += 12; y--; } while (mo > 12) { mo -= 12; y++; } return `${y}-${pad(mo)}`; };
+const mDiff = (a, b) => { const [ya, ma] = a.split('-').map(Number), [yb, mb] = b.split('-').map(Number); return (yb - ya) * 12 + (mb - ma); };
+const dayTitle = s => { const [, m, d] = s.split('-').map(Number); return `${d} ${TH_M[m-1]}`; };
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+const sum = (a, f = x => x.amount) => a.reduce((s, x) => s + f(x), 0);
+const icon = (k, size = 22) => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[k]}</svg>`;
+function toast(msg, ms = 2200) { const t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('show'), ms); }
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+  del(k) { try { localStorage.removeItem(k); } catch (e) {} },
+};
+
+/* ======================= demo data ======================= */
+function seed() {
+  const cur = curMonth(), today = new Date().getDate();
+  const months = [5, 4, 3, 2, 1, 0].map(i => shiftM(cur, -i));
+  const P = {
+    'เงินเดือน':            [[1, [20000,20000,21000,21000,21000,21000]]],
+    'ค่าเดินทาง+เบี้ยเลี้ยง': [[1, [2000,2000,2000,4000,3000,1840]]],
+    'ค่าคอมขาย':            [[15, [3000,7500,5000,300,4000,2280]]],
+    'ค่าคอมซ่อม':           [[20, [0,0,1200,0,0,0]]],
+    'ค่าไฟบ้าน':            [[3, [1600,1500,1500,2080,2600,1500]]],
+    'ค่าโทรศัพท์':          [[3, [600,1000,1000,1000,800,800]]],
+    'ค่าประกันสังคม':       [[1, [875,875,875,875,875,875]]],
+    'ค่ากองทุน':            [[1, [1040,1040,1040,1040,1040,1040]]],
+    'ค่าเดินทาง':           [[8, [300,300,450,300,300,300]]],
+    'ค่าเปย์แฟน':           [[14, [0,1000,0,500,0,0]]],
+    'บัตรกดเงินสด กสิกร':   [[5, [793,800,793,800,793,793]]],
+    'ผ่อน เฟิร์สช้อยส์':     [[5, [1500,1000,980,1000,2200,1000]]],
+    'ผ่อน Shopee':          [[10, [0,500,800,650,600,650]]],
+    'เก็บออมระยะยาว':      [[6, [2000,0,0,2500,2500,2000]]],
+    'เก็บพัฒนาตัวเอง':     [[6, [2000,0,1000,0,500,0]]],
+    'เก็บเงินฉุกเฉิน':      [[6, [1000,4000,3000,2000,1500,0]]],
+    'ซื้อกองทุน':           [[25, [0,0,3052,1000,0,3000]]],
+  };
+  const food = [4500, 4500, 5000, 3500, 3000, 3200];
+  const foodNotes = ['ข้าวมันไก่', 'ก๋วยเตี๋ยว', 'กาแฟ', 'ข้าวเย็นกับแฟน', 'ซื้อของเข้าบ้าน', 'ส้มตำ', 'ข้าวกะเพรา'];
+  const foodW = [.1, .12, .06, .22, .3, .08, .12], foodD = [3, 7, 11, 14, 18, 23, 27];
+  const foodPay = ['kbank', 'kbank', 'cash', 'kbank', 'kbank', 'cash', 'cash'];
+  const shop = [600, 0, 1200, 450, 800, 350];                 // ของใช้ รูดบัตรกรุงศรี
+  const oldPay = { kbank: [500, 1000, 1000, 1500, 1500, 1500], krungsri: [0, 2000, 0, 0, 0, 1500] };
+  const tx = []; let n = 0;
+  const add = (m, day, category, amount, note = '', pay = 'cash') => {
+    if (!amount || (m === cur && day > today)) return;
+    const c = CATS.find(x => x.name === category);
+    const date = `${m}-${pad(day)}`;
+    tx.push({ id: 's' + (n++), createdAt: `${date}T${pad(8 + (n % 12))}:00:00`, date, month: m, type: c.type, bucket: c.bucket, category, amount, note, pay: c.type === 'expense' ? pay : undefined });
+  };
+  const cardSpend = { kbank: [], krungsri: [] };
+  months.forEach((m, i) => {
+    for (const cat in P) for (const [day, vals] of P[cat]) add(m, day, cat, vals[i]);
+    let kb = 0;
+    foodNotes.forEach((note, j) => { const a = Math.round(food[i] * foodW[j] / 5) * 5; add(m, foodD[j], 'ค่าอาหาร', a, note, foodPay[j]); if (foodPay[j] === 'kbank' && !(m === cur && foodD[j] > today)) kb += a; });
+    add(m, 20, 'ของใช้/ช้อปปิ้ง', shop[i], 'ของใช้ในบ้าน', 'krungsri');
+    cardSpend.kbank[i] = kb; cardSpend.krungsri[i] = (m === cur && 20 > today) ? 0 : shop[i];
+  });
+  const names = { kbank: 'บัตรเครดิต กสิกร', krungsri: 'บัตรเครดิต กรุงศรี' };
+  months.forEach((m, i) => {           // pay last month's swipes + part of the old debt on the 5th
+    if (m === cur && 5 > today) return;
+    for (const c of ['kbank', 'krungsri']) {
+      const amt = (i ? cardSpend[c][i - 1] : 0) + oldPay[c][i];
+      if (!amt) continue;
+      const date = `${m}-05`;
+      tx.push({ id: 's' + (n++), createdAt: `${date}T07:00:00`, date, month: m, type: 'cardpay', card: c, bucket: 'card', category: 'จ่ายบิล ' + names[c], amount: amt, note: '' });
+    }
+  });
+  const start = months[0];
+  return {
+    mode: 'demo', ratios: { need: 40, card: 20, save: 20, invest: 20 }, alertPct: 90, alerted: {}, baseSalary: 21000, tx, chat: [],
+    debts: [
+      { id: 'kbank', kind: 'card', name: 'บัตรเครดิต กสิกร', balance: 20000, monthly: 1500, startMonth: start },
+      { id: 'krungsri', kind: 'card', name: 'บัตรเครดิต กรุงศรี', balance: 8000, monthly: 1500, startMonth: start },
+      { id: 'd2', kind: 'loan', name: 'บัตรกดเงินสด กสิกร', category: 'บัตรกดเงินสด กสิกร', balance: 15000, monthly: 793, installments: 0, startMonth: start },
+      { id: 'd3', kind: 'loan', name: 'ผ่อน เฟิร์สช้อยส์', category: 'ผ่อน เฟิร์สช้อยส์', balance: 15000, monthly: 1000, installments: 15, startMonth: start },
+      { id: 'd5', kind: 'loan', name: 'ผ่อน Shopee', category: 'ผ่อน Shopee', balance: 5000, monthly: 650, installments: 0, startMonth: start },
+    ],
+    goals: [
+      { id: 'g1', name: 'เงินฉุกเฉิน 6 เดือน', category: 'เก็บเงินฉุกเฉิน', target: 40000, initial: 20000, deadline: shiftM(cur, 9), startMonth: start },
+      { id: 'g2', name: 'คอร์สพัฒนาตัวเอง', category: 'เก็บพัฒนาตัวเอง', target: 10000, initial: 0, deadline: shiftM(cur, 4), startMonth: start },
+      { id: 'g3', name: 'ออมระยะยาว', category: 'เก็บออมระยะยาว', target: 100000, initial: 15000, deadline: shiftM(cur, 24), startMonth: start },
+    ],
+  };
+}
+function emptyDb() {
+  const m = curMonth();
+  return { mode: 'local', ratios: { need: 40, card: 20, save: 20, invest: 20 }, alertPct: 90, alerted: {}, baseSalary: 21000, tx: [], chat: [],
+    debts: [{ id: 'kbank', kind: 'card', name: 'บัตรเครดิต กสิกร', balance: 0, monthly: 0, startMonth: m },
+            { id: 'krungsri', kind: 'card', name: 'บัตรเครดิต กรุงศรี', balance: 0, monthly: 0, startMonth: m }], goals: [] };
+}
+let db = store.get('fl4-db', null);
+if (!db) { db = seed(); store.set('fl4-db', db); }
+if (!db.mode) db.mode = 'demo';
+const save = () => store.set('fl4-db', db);
+
+/* ======================= sync with Google Sheet ======================= */
+let cfg = store.get('fl-cfg', { url: '', token: '' });
+const connected = () => !!(cfg.url && cfg.token);
+const outbox = { get: () => store.get('fl-outbox', []), set: v => store.set('fl-outbox', v) };
+const SYNC = { state: connected() ? 'busy' : 'none', msg: '', busy: false, last: store.get('fl-lastsync', null), ai: false };
+async function api(action, payload = {}) {
+  let res;
+  try {
+    res = await fetch(cfg.url, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ token: cfg.token, action, ...payload }) });
+  } catch (e) { throw Object.assign(new Error('เชื่อมต่อไม่ได้ ตรวจอินเทอร์เน็ตหรือ URL'), { net: true }); }
+  let j; try { j = await res.json(); } catch (e) { throw Object.assign(new Error('Sheet ตอบกลับไม่ถูกต้อง ตรวจว่า Deploy แบบ Anyone แล้ว'), { server: true }); }
+  if (!j.ok) throw Object.assign(new Error(j.error || 'เกิดข้อผิดพลาด'), { server: true });
+  return j.data;
+}
+function upsertIn(arr, obj) { const i = arr.findIndex(x => x.id === obj.id); if (i >= 0) arr[i] = { ...obj }; else arr.push({ ...obj }); }
+function applyOp(o) {
+  switch (o.op) {
+    case 'tx': upsertIn(db.tx, o.data); break;
+    case 'debt': upsertIn(db.debts, o.data); break;
+    case 'goal': upsertIn(db.goals, o.data); break;
+    case 'txDel': db.tx = db.tx.filter(x => x.id !== o.id); break;
+    case 'debtDel': db.debts = db.debts.filter(x => x.id !== o.id); break;
+    case 'goalDel': db.goals = db.goals.filter(x => x.id !== o.id); break;
+    case 'settings': if (o.data.ratios) db.ratios = { ...o.data.ratios }; if (o.data.alertPct !== undefined) db.alertPct = o.data.alertPct; if (o.data.baseSalary !== undefined) db.baseSalary = o.data.baseSalary; break;
+  }
+}
+/* every data change goes through here: apply locally, persist, queue for the Sheet */
+function commit(ops) {
+  ops.forEach(applyOp); save();
+  if (connected()) { outbox.set([...outbox.get(), ...ops.map(o => JSON.parse(JSON.stringify(o)))]); scheduleSync(); }
+}
+let syncTimer = null;
+function scheduleSync(ms = 700) { clearTimeout(syncTimer); syncTimer = setTimeout(syncNow, ms); }
+function setSync(state, msg = '') { SYNC.state = state; SYNC.msg = msg; renderSyncChip(); }
+async function syncNow() {
+  if (!connected() || SYNC.busy) return;
+  SYNC.busy = true; setSync('busy');
+  try {
+    const q = outbox.get();
+    if (q.length) { await api('push', { ops: q }); outbox.set(outbox.get().slice(q.length)); }
+    const d = await api('pull');
+    db.tx = d.tx.map(t => ({ ...t, amount: Number(t.amount) || 0 })); db.debts = d.debts; db.goals = d.goals;
+    db.ratios = d.settings.ratios; db.alertPct = d.settings.alertPct; db.baseSalary = d.settings.baseSalary; db.mode = 'sheet';
+    outbox.get().forEach(applyOp);                     // changes made while we were syncing
+    save(); SYNC.ai = !!d.ai; SYNC.last = new Date().toISOString(); store.set('fl-lastsync', SYNC.last);
+    setSync('ok'); maybeRemoteAI(); render();
+  } catch (e) {
+    setSync(e.net ? 'off' : 'err', e.message);
+  } finally {
+    SYNC.busy = false;
+    if (outbox.get().length && SYNC.state === 'ok') scheduleSync();
+  }
+}
+function renderSyncChip() {
+  const c = $('syncChip'); if (!c) return;
+  const n = outbox.get().length;
+  const map = {
+    none: db.mode === 'demo' ? ['demo', 'ตัวอย่าง'] : ['', 'ในเครื่อง'],
+    busy: ['busy', 'กำลังซิงค์…'], ok: ['ok', 'ซิงค์แล้ว'],
+    off: ['off', n ? `รอส่ง ${n}` : 'ออฟไลน์'], err: ['err', 'ซิงค์ไม่ได้'],
+  };
+  const [cls, label] = connected() ? map[SYNC.state] || map.ok : map.none;
+  c.className = 'syncchip ' + cls; c.innerHTML = `<i></i>${label}`;
+  c.title = SYNC.msg || '';
+}
+window.addEventListener('online', () => scheduleSync(100));
+document.addEventListener('visibilitychange', () => { if (!document.hidden) scheduleSync(300); });
+
+/* ======================= calculations ======================= */
+const txOf = m => db.tx.filter(t => t.month === m);
+const sortTx = a => a.slice().sort((x, y) => (y.date + y.createdAt).localeCompare(x.date + x.createdAt));
+const cardsList = () => db.debts.filter(d => d.kind === 'card');
+const cardName = id => { const c = db.debts.find(d => d.id === id); return c ? c.name : ''; };
+const shortCard = id => cardName(id).replace('บัตรเครดิต ', '');
+
+/* Credit cards: swipes count as spending in their own bucket when they happen.
+   A bill payment first clears the new swipes (not counted again); anything beyond that
+   pays down the old debt, and only that part counts in the card bucket. */
+function cardState() {
+  const cards = {}, alloc = {};
+  cardsList().forEach(d => cards[d.id] = { old: d.balance, pending: 0, start: d.startMonth });
+  db.tx.slice().sort((a, b) => (a.date + a.createdAt).localeCompare(b.date + b.createdAt)).forEach(t => {
+    if (t.type === 'expense' && cards[t.pay] && t.month >= cards[t.pay].start) cards[t.pay].pending += t.amount;
+    if (t.type === 'cardpay' && cards[t.card] && t.month >= cards[t.card].start) {
+      const c = cards[t.card];
+      const cover = Math.min(t.amount, Math.max(0, c.pending)); c.pending -= cover;
+      let rest = t.amount - cover;
+      const debt = Math.min(rest, c.old); c.old -= debt; rest -= debt;
+      c.pending -= rest; // overpayment becomes credit
+      alloc[t.id] = { cover, debt };
+    }
+  });
+  return { cards, alloc };
+}
+const isCard = id => !!id && id !== 'cash' && db.debts.some(d => d.kind === 'card' && d.id === id);
+/* card swipes belong to the card bucket (goal: all credit-card spending ≤ its share) */
+const effBucket = t => t.type === 'expense' && isCard(t.pay) ? 'card' : t.bucket;
+/* everything that counts against a bucket in month m */
+function spendItems(m, cs = cardState()) {
+  const out = [];
+  txOf(m).forEach(t => {
+    if (t.type === 'expense') out.push({ category: t.category, bucket: effBucket(t), amount: t.amount, swipe: isCard(t.pay) });
+    if (t.type === 'cardpay') { const a = cs.alloc[t.id] || { debt: t.amount }; if (a.debt > 0) out.push({ category: 'ลดหนี้เก่า ' + cardName(t.card), bucket: 'card', amount: a.debt }); }
+  });
+  return out;
+}
+/* salary base + average of other income over the previous 3 months that have data */
+function expectedIncome(m) {
+  const vars = [1, 2, 3].map(i => txOf(shiftM(m, -i)).filter(t => t.type === 'income'))
+    .filter(l => l.length).map(l => sum(l.filter(t => t.category !== SALARY)));
+  const avg = vars.length ? sum(vars, x => x) / vars.length : 0;
+  return { total: (Number(db.baseSalary) || 0) + avg, avgVar: avg };
+}
+function summary(m) {
+  const cs = cardState();
+  const txs = txOf(m);
+  const income = sum(txs.filter(t => t.type === 'income'));
+  const items = spendItems(m, cs);
+  const expense = sum(items);
+  const exp = expectedIncome(m);
+  const past = m < curMonth();
+  const base = past ? income : Math.max(income, exp.total);
+  const basis = past || income >= exp.total ? 'actual' : 'expected';
+  const buckets = {};
+  for (const b in BUCKETS) {
+    const budget = base * (db.ratios[b] || 0) / 100;
+    const spent = sum(items.filter(t => t.bucket === b));
+    buckets[b] = { key: b, label: BUCKETS[b].label, ratio: db.ratios[b], budget, spent, remaining: budget - spent,
+                   pct: budget > 0 ? spent / budget * 100 : (spent > 0 ? 100 : 0) };
+  }
+  const pending = sum(Object.values(cs.cards), c => Math.max(0, c.pending));
+  return { month: m, income, expected: exp.total, avgVar: exp.avgVar, base, basis, expense,
+           left: base - expense, net: income - expense, buckets, alertPct: db.alertPct, pending, items };
+}
+function debtStatus(d) {
+  if (d.kind === 'card') {
+    const c = cardState().cards[d.id] || { old: d.balance, pending: 0 };
+    const pending = Math.max(0, c.pending), paid = d.balance - c.old;
+    const monthsLeft = c.old <= 0 ? 0 : (d.monthly > 0 ? Math.ceil(c.old / d.monthly) : null);
+    return { card: true, old: c.old, pending, paid, remaining: c.old + pending,
+             pct: d.balance > 0 ? Math.min(100, paid / d.balance * 100) : 100, monthsLeft,
+             payoff: monthsLeft === null ? null : shiftM(curMonth(), monthsLeft) };
+  }
+  const pays = db.tx.filter(t => t.type === 'expense' && t.category === d.category && t.month >= d.startMonth);
+  const paid = sum(pays);
+  const remaining = Math.max(0, d.balance - paid);
+  const paidMonths = new Set(pays.map(t => t.month)).size;
+  const monthsLeft = remaining <= 0 ? 0 : (d.monthly > 0 ? Math.ceil(remaining / d.monthly) : null);
+  return { paid, remaining, pct: d.balance > 0 ? Math.min(100, paid / d.balance * 100) : 100, paidMonths, monthsLeft,
+           payoff: monthsLeft === null ? null : shiftM(curMonth(), monthsLeft) };
+}
+function goalStatus(g) {
+  const adds = db.tx.filter(t => t.type === 'expense' && t.category === g.category && t.month >= g.startMonth);
+  const saved = (Number(g.initial) || 0) + sum(adds);
+  const left = Math.max(0, g.target - saved);
+  const monthsLeft = Math.max(1, mDiff(curMonth(), g.deadline));
+  const perMonth = left / monthsLeft;
+  const recent = sum(adds.filter(t => mDiff(t.month, curMonth()) < 3)) / 3;
+  return { saved, left, pct: Math.min(100, saved / g.target * 100), monthsLeft, perMonth, recent,
+           done: left <= 0, onTrack: left <= 0 || recent >= perMonth * 0.95 };
+}
+
+/* ======================= state ======================= */
+const S = {
+  tab: store.get('fl-tab', 'chat'), month: curMonth(), openRow: null, statSel: curMonth(), plan: 'debt',
+  theme: store.get('fl2-theme', 'auto'),
+  f: { q: '', type: 'all', bucket: 'all', period: 'month' },
+};
+function applyLook() {
+  if (S.theme === 'auto') delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = S.theme;
+  document.querySelectorAll('#setTheme button').forEach(b => b.setAttribute('aria-pressed', b.dataset.theme === S.theme));
+  const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+  document.querySelector('meta[name="theme-color"]').setAttribute('content', bg || '#16213A');
+}
+
+/* ======================= render: shared bits ======================= */
+function txRows(list) {
+  if (!list.length) return '';
+  const cs = cardState();
+  const days = {};
+  list.forEach(t => (days[t.date] = days[t.date] || []).push(t));
+  return Object.keys(days).sort().reverse().map(date => {
+    const items = days[date], out = sum(items.filter(t => t.type === 'expense'));
+    return `<div class="day"><div class="day-head"><span>${dayTitle(date)}</span><span class="num">${out ? 'จ่าย ' + money(out) : ''}</span></div>
+      <div class="rows">${items.map(t => `<div class="row-wrap${S.openRow === t.id ? ' open' : ''}">
+        <button class="row" data-id="${esc(t.id)}" aria-expanded="${S.openRow === t.id}">
+          <span class="badge" style="${bc(t.type === 'income' ? '' : effBucket(t))}" aria-hidden="true">${t.type === 'income' ? '💰' : t.type === 'cardpay' ? '🧾' : BUCKETS[t.bucket].ic}</span>
+          <span><span class="cat">${esc(t.category)}</span>${rowNote(t, cs)}</span>
+          <span class="amt num${t.type === 'income' ? ' inc' : t.type === 'cardpay' ? ' xfer' : ''}">${t.type === 'income' ? '+' : ''}${money(t.amount)}</span>
+        </button>
+        <div class="row-actions"><button class="btn-del" data-del="${esc(t.id)}">ลบรายการนี้</button></div></div>`).join('')}</div></div>`;
+  }).join('');
+}
+
+function rowNote(t, cs) {
+  let h = t.note ? `<span class="note">${esc(t.note)}</span>` : '';
+  if (t.type === 'expense' && t.pay && t.pay !== 'cash' && cardName(t.pay)) h += `<span class="paytag">💳 ${esc(shortCard(t.pay))}</span>`;
+  if (t.type === 'cardpay') {
+    const a = cs.alloc[t.id];
+    if (a) h += `<span class="note">เคลียร์ยอดรูด ${money(a.cover)}${a.debt ? ` ลดหนี้เก่า ${money(a.debt)}` : ''}</span>`;
+  }
+  return h;
+}
+function bucketViz(s) {
+  return `<div class="jarcard"><div class="jars">${Object.values(s.buckets).map(b => {
+    const level = b.budget > 0 ? Math.max(0, Math.min(1, b.remaining / b.budget)) : 0, over = b.remaining < 0;
+    return `<button class="jar${over ? ' over' : ''}" style="${bc(b.key)}" data-jar="${b.key}" aria-label="${b.label} เหลือ ${money(b.remaining)} จากงบ ${money(b.budget)} แตะเพื่อดูรายการ">
+      <div class="vessel${level < .25 ? ' low' : ''}"><div class="fill" style="height:${(level * 100).toFixed(1)}%"></div><div class="pct num">${Math.round(level * 100)}%</div></div>
+      <div class="name">${b.label}</div><div class="rem num">${over ? 'เกิน ' + money(-b.remaining) : money(b.remaining)}</div>
+      <div class="used num">งบ ${money(b.budget)}</div></button>`;
+  }).join('')}</div><p class="viz-note">น้ำในโหลคือเงินที่ยังเหลือ แตะโหลเพื่อดูรายการของก้อนนั้น</p></div>`;
+}
+
+/* ======================= views ======================= */
+function viewHome() {
+  const s = summary(S.month);
+  const alerts = Object.values(s.buckets).filter(b => b.budget > 0 && b.pct >= s.alertPct)
+    .map(b => `<div class="alert">${b.pct >= 100 ? '🚨' : '⚠️'} ก้อน${b.label} ใช้ไป ${Math.round(b.pct)}% ของงบ ${money(b.budget)}</div>`).join('');
+  const debts = db.debts.map(debtStatus), debtLeft = sum(debts, d => d.remaining);
+  const goals = db.goals.map(goalStatus), gSaved = sum(goals, g => g.saved), gTarget = sum(db.goals, g => g.target);
+  const recent = sortTx(txOf(S.month)).slice(0, 5);
+  return `
+    <section class="hero">
+      <div><div class="label">ใช้ได้อีกเดือนนี้</div></div>
+      <div class="big num${s.left < 0 ? ' neg' : ''}">${money(s.left)}</div>
+      <div class="sub">${s.basis === 'expected'
+        ? `<span>งบเดือนนี้ <b class="num">${money(s.base)}</b></span><span>รับจริงแล้ว <b class="num">${money(s.income)}</b></span>`
+        : `<span>รายรับ <b class="num">${money(s.income)}</b></span>`}<span>ใช้ไป <b class="num">${money(s.expense)}</b></span></div>
+      <div class="note">${s.basis === 'expected' ? `<span>งบคิดจากเงินเดือน ${money(db.baseSalary)} + ค่าคอมและเบี้ยเลี้ยงเฉลี่ย ${money(s.avgVar)}</span>` : ''}
+        ${S.month === curMonth() && s.pending > 0 ? `<span>💳 ยอดรูดบัตรที่ต้องเตรียมจ่าย ${money(s.pending)}</span>` : ''}</div>
+    </section>
+    ${bucketViz(s)}
+    ${alerts ? `<div class="alerts">${alerts}</div>` : ''}
+    <div class="aicard" id="aiCard" ${AI.sample ? '' : 'hidden'}>
+      <div class="t">✨ ผู้ช่วยการเงิน</div>
+      <div class="d">ให้ AI ดูตัวเลขของคุณแล้วช่วยคิดตามเป้า 40/20/20/20</div>
+      <div class="chips">${AI_PROMPTS.map((q, i) => `<button class="chip" data-ai="${i}">${q.label}</button>`).join('')}</div>
+    </div>
+    <div class="minis">
+      <button class="mini" data-go="debt"><div class="k">หนี้คงเหลือ</div><div class="v num">${money(debtLeft)}</div>
+        <div class="s">${debts.filter(d => d.remaining > 0).length} รายการ</div></button>
+      <button class="mini" data-go="goal" style="${bc('save')}"><div class="k">เงินออมตามเป้า</div><div class="v num">${money(gSaved)}</div>
+        <div class="bar"><span style="width:${gTarget ? Math.min(100, gSaved / gTarget * 100).toFixed(1) : 0}%"></span></div></button>
+    </div>
+    <div class="sec-h"><h3>รายการล่าสุด</h3>${recent.length ? '<button class="link" data-go="list">ดูทั้งหมด</button>' : ''}</div>
+    ${recent.length ? txRows(recent) : '<div class="empty">ยังไม่มีรายการเดือนนี้<br>กดปุ่ม + เพื่อเริ่มบันทึก</div>'}`;
+}
+
+function filteredTx() {
+  const f = S.f, q = f.q.trim().toLowerCase();
+  let from = S.month, to = S.month;
+  if (f.period === '3m') from = shiftM(S.month, -2);
+  if (f.period === 'all') { from = '0000-00'; to = '9999-99'; }
+  return sortTx(db.tx.filter(t => t.month >= from && t.month <= to
+    && (f.type === 'all' || t.type === f.type)
+    && (f.bucket === 'all' || effBucket(t) === f.bucket)
+    && (!q || t.category.toLowerCase().includes(q) || (t.note || '').toLowerCase().includes(q) || String(t.amount).includes(q))));
+}
+function viewList() {
+  const f = S.f;
+  const chip = (group, val, label, c) => `<button class="fchip" data-f="${group}" data-v="${val}" aria-pressed="${f[group] === val}">${c ? `<span class="dot" style="${bc(c)}"></span>` : ''}${label}</button>`;
+  return `
+    <h2 class="title">รายการ</h2>
+    <div class="search">${icon('search', 18)}<input id="q" type="search" placeholder="ค้นหาหมวด โน้ต หรือจำนวนเงิน" value="${esc(f.q)}" aria-label="ค้นหา"></div>
+    <div class="filters">${chip('period','month','เดือนนี้')}${chip('period','3m','3 เดือน')}${chip('period','all','ทั้งหมด')}<span class="fsep"></span>
+      ${chip('type','all','ทุกประเภท')}${chip('type','expense','รายจ่าย')}${chip('type','income','รายรับ')}${chip('type','cardpay','จ่ายบิลบัตร')}</div>
+    <div class="filters" style="padding-top:2px">${chip('bucket','all','ทุกก้อน')}${Object.keys(BUCKETS).map(k => chip('bucket', k, BUCKETS[k].label, k)).join('')}</div>
+    <div id="results"></div>`;
+}
+function renderResults() {
+  const list = filteredTx();
+  const out = sum(list.filter(t => t.type === 'expense')), inc = sum(list.filter(t => t.type === 'income'));
+  $('results').innerHTML = `<div class="result-sum"><span>${list.length} รายการ</span><span>${inc ? `รับ <b class="num">${money(inc)}</b> ` : ''}${out ? `จ่าย <b class="num">${money(out)}</b>` : ''}</span></div>`
+    + (list.length ? txRows(list) : `<div class="empty">ไม่พบรายการที่ตรงกับเงื่อนไข<br>ลองเปลี่ยนคำค้นหรือช่วงเวลา</div>`);
+}
+
+function viewStats() {
+  const months = [5, 4, 3, 2, 1, 0].map(i => shiftM(S.month, -i));
+  const H = months.map(summary);
+  if (!months.includes(S.statSel)) S.statSel = S.month;
+  const max = Math.max(1, ...H.map(h => Math.max(h.income, h.expense))) * 1.08;
+  const W = 340, L = 30, CH = 170, top = 12, base = top + CH, gw = (W - L) / 6, bw = 15;
+  const y = v => base - v / max * CH;
+  const ticks = [0.25, 0.5, 0.75, 1].map(p => max / 1.08 * p);
+  const grid = ticks.map(v => `<line x1="${L}" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-dasharray="2 3"/><text x="0" y="${y(v) + 4}">${kMoney(v)}</text>`).join('');
+  const bars = H.map((h, i) => {
+    const cx = L + gw * i + gw / 2, sel = h.month === S.statSel;
+    let yy = base, stack = '';
+    for (const k of Object.keys(BUCKETS)) {
+      const hgt = h.buckets[k].spent / max * CH; yy -= hgt;
+      stack += `<rect x="${cx + 1}" y="${yy}" width="${bw}" height="${hgt}" fill="${BUCKETS[k].f}"/>`;
+    }
+    return `<g class="${sel ? 'sel' : ''}" opacity="${sel ? 1 : .45}" style="cursor:pointer" data-sm="${h.month}">
+      <rect x="${L + gw * i}" y="0" width="${gw}" height="${base + 22}" fill="transparent"/>
+      <rect x="${cx - bw - 1}" y="${y(h.income)}" width="${bw}" height="${base - y(h.income)}" fill="var(--surface2)" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="3 2" rx="3"/>
+      ${stack}<text x="${cx}" y="${base + 16}" text-anchor="middle">${TH_MS[Number(h.month.slice(5)) - 1]}</text></g>`;
+  }).join('');
+  const sel = H.find(h => h.month === S.statSel);
+
+  const withIncome = H.filter(h => h.income > 0);
+  const avgInc = withIncome.length ? sum(withIncome, h => h.income) / withIncome.length : 0;
+  const avgExp = withIncome.length ? sum(withIncome, h => h.expense) / withIncome.length : 0;
+  const topM = H.reduce((a, b) => b.expense > a.expense ? b : a, H[0]);
+  const allTx = months.flatMap(txOf);
+  const incAll = sum(allTx.filter(t => t.type === 'income')), comm = sum(allTx.filter(t => COMMISSION.includes(t.category)));
+  const food = months.map(m => sum(txOf(m).filter(t => t.category === 'ค่าอาหาร')));
+  const foodAvg = sum(food.slice(0, 5), x => x) / 5, foodNow = food[5];
+  const overMonths = H.filter(h => h.net < 0).length;
+  const swiped = months.map(m => sum(txOf(m).filter(t => t.type === 'expense' && t.pay && t.pay !== 'cash')));
+  const daily = sum(H.map(h => sum(h.items.filter(t => t.swipe || t.bucket === 'need'), x => x.amount)), x => x);
+  const swipeShare = daily ? sum(swiped, x => x) / daily : 0;
+
+  const byCat = {};
+  sel.items.forEach(t => { byCat[t.category] = byCat[t.category] || { v: 0, b: t.bucket }; byCat[t.category].v += t.amount; });
+  const rank = Object.entries(byCat).map(([n, o]) => [n, o.v, o.b]).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  const rMax = rank.length ? rank[0][1] : 1;
+
+  return `
+    <h2 class="title">สถิติ 6 เดือน</h2>
+    <div class="card">
+      <h4>รายรับเทียบรายจ่าย</h4><div class="muted small">แตะแท่งเพื่อดูรายละเอียดแต่ละเดือน</div>
+      <svg class="chart" viewBox="0 0 ${W} ${base + 24}" role="img" aria-label="กราฟรายรับและรายจ่าย 6 เดือน" id="chart">${grid}${bars}</svg>
+      <div class="legend"><span><i class="ol"></i>รายรับ</span>${Object.keys(BUCKETS).map(k => `<span><i class="dot" style="${bc(k)}"></i>${BUCKETS[k].label}</span>`).join('')}</div>
+    </div>
+    <div class="card">
+      <h4>${mTitle(sel.month)}</h4>
+      <div class="kv"><div><div class="k">รายรับ</div><div class="v num">${money(sel.income)}</div></div>
+        <div><div class="k">รายจ่าย</div><div class="v num">${money(sel.expense)}</div></div>
+        <div><div class="k">คงเหลือ</div><div class="v num" style="color:${sel.net < 0 ? 'var(--card)' : 'inherit'}">${money(sel.net)}</div></div></div>
+      <div class="stack" role="img" aria-label="สัดส่วนรายจ่ายตามก้อน">${Object.keys(BUCKETS).map(k => `<span style="${bc(k)};width:${sel.expense ? (sel.buckets[k].spent / sel.expense * 100).toFixed(1) : 0}%"></span>`).join('')}</div>
+      <div class="legend">${Object.keys(BUCKETS).map(k => `<span><i class="dot" style="${bc(k)}"></i>${BUCKETS[k].label} ${sel.expense ? Math.round(sel.buckets[k].spent / sel.expense * 100) : 0}%</span>`).join('')}</div>
+      <div class="sec-h" style="margin-top:16px"><h3 style="font-size:14px">จ่ายมากที่สุด</h3></div>
+      <div class="rank">${rank.length ? rank.map(([n, v, b]) => {
+        return `<div><div class="rl"><span>${esc(n)}</span><span class="num">${money(v)}</span></div><div class="bar" style="${bc(b)}"><span style="width:${(v / rMax * 100).toFixed(1)}%"></span></div></div>`;
+      }).join('') : '<div class="muted small">ยังไม่มีรายจ่ายในเดือนนี้</div>'}</div>
+    </div>
+    <div class="card">
+      <h4>ข้อสังเกต</h4>
+      <ul class="insights" style="margin-top:10px">
+        <li><span class="ic">📊</span><span>เฉลี่ยต่อเดือน รับ ${money(avgInc)} จ่าย ${money(avgExp)}</span></li>
+        <li><span class="ic">💼</span><span>ค่าคอมคิดเป็น ${incAll ? Math.round(comm / incAll * 100) : 0}% ของรายรับ 6 เดือน งบจึงใช้ค่าเฉลี่ย 3 เดือนแทน เพื่อให้งบต้นเดือนไม่ขึ้นลงตามค่าคอม</span></li>
+        <li><span class="ic">🔝</span><span>จ่ายมากสุดเดือน${TH_M[Number(topM.month.slice(5)) - 1]} ${money(topM.expense)}</span></li>
+        <li><span class="ic">🍜</span><span>ค่าอาหาร${mTitle(S.month).split(' ')[0]} ${money(foodNow)} ${foodAvg ? (foodNow > foodAvg ? 'สูงกว่า' : 'ต่ำกว่า') + 'ค่าเฉลี่ย 5 เดือนก่อน ' + money(Math.abs(foodNow - foodAvg)) : ''}</span></li>
+        <li><span class="ic">💳</span><span>รายจ่ายประจำวันรูดบัตรประมาณ ${Math.round(swipeShare * 100)}% ยอดรูดนับในก้อนบัตรเครดิตตั้งแต่ตอนรูด ไม่นับซ้ำตอนจ่ายบิล</span></li>
+        ${overMonths ? `<li><span class="ic">⚠️</span><span>มี ${overMonths} เดือนที่จ่ายเกินรายรับ</span></li>` : ''}
+      </ul>
+    </div>`;
+}
+
+function viewDebt() {
+  const rows = db.debts.map(d => ({ d, s: debtStatus(d) })).sort((a, b) => (a.s.remaining === 0) - (b.s.remaining === 0) || a.s.remaining - b.s.remaining);
+  const total = sum(rows, r => r.s.remaining), monthly = sum(rows.filter(r => r.s.remaining > 0), r => r.d.monthly);
+  const last = rows.map(r => r.s.payoff).filter(Boolean).sort().pop();
+  return `
+    <h2 class="title">หนี้และการผ่อน</h2>
+    <div class="summary-strip">
+      <div class="mini"><div class="k">คงเหลือทั้งหมด</div><div class="v num">${money(total)}</div></div>
+      <div class="mini"><div class="k">ตั้งใจจ่ายต่อเดือน</div><div class="v num">${money(monthly)}</div>
+        <div class="s">${last && total > 0 ? 'หมดหนี้ประมาณ ' + mShort(last) : ''}</div></div>
+    </div>
+    ${rows.map(({ d, s }) => `
+      <button class="item" data-debt="${esc(d.id)}">
+        <div class="top"><span class="name">${esc(d.name)}</span><span class="amt num">${money(s.remaining)}</span></div>
+        <div class="bar" style="${bc('need')}"><span style="width:${s.pct.toFixed(1)}%"></span></div>
+        ${s.card ? `<div class="foot"><span>หนี้เก่าเหลือ <span class="strong num">${money(s.old)}</span> จาก ${money(d.balance)}</span>
+          <span class="tag ${s.old === 0 ? 'good' : ''}">${s.old === 0 ? 'หนี้เก่าหมดแล้ว' : s.monthsLeft ? `อีก ${s.monthsLeft} เดือน` : 'ยังไม่ตั้งเป้า'}</span></div>
+          <div class="foot" style="margin-top:2px"><span>ยอดรูดใหม่รอจ่าย <span class="strong num">${money(s.pending)}</span></span></div>`
+        : `<div class="foot"><span>จ่ายแล้ว ${money(s.paid)} จาก ${money(d.balance)}${d.installments ? ` (${s.paidMonths}/${d.installments} งวด)` : ''}</span>
+          <span class="tag ${s.remaining === 0 ? 'good' : ''}">${s.remaining === 0 ? 'ปิดแล้ว' : s.monthsLeft ? `อีก ${s.monthsLeft} เดือน` : 'ไม่ได้ตั้งค่างวด'}</span></div>`}
+      </button>`).join('')}
+    <button class="addline" id="addDebt">+ เพิ่มหนี้หรือรายการผ่อน</button>
+    <p class="hint" style="text-align:center;margin-top:12px">บัตรเครดิต: ยอดลดเมื่อบันทึก “จ่ายบิลบัตร” รายการผ่อน: ยอดลดเมื่อบันทึกรายจ่ายในหมวดเดียวกัน</p>`;
+}
+
+function viewGoal() {
+  const rows = db.goals.map(g => ({ g, s: goalStatus(g) }));
+  const saved = sum(rows, r => r.s.saved), need = sum(rows.filter(r => !r.s.done), r => r.s.perMonth);
+  return `
+    <h2 class="title">เป้าหมายการออม</h2>
+    <div class="summary-strip">
+      <div class="mini"><div class="k">ออมแล้วทั้งหมด</div><div class="v num">${money(saved)}</div></div>
+      <div class="mini"><div class="k">ต้องเก็บต่อเดือน</div><div class="v num">${money(need)}</div>
+        <div class="s">งบก้อนเก็บประจำ ${money(summary(curMonth()).buckets.save.budget)}</div></div>
+    </div>
+    ${rows.map(({ g, s }) => `
+      <button class="item" data-goal="${esc(g.id)}">
+        <div class="top"><span class="name">${esc(g.name)}</span><span class="amt num">${Math.round(s.pct)}%</span></div>
+        <div class="bar" style="${bc('save')}"><span style="width:${s.pct.toFixed(1)}%"></span></div>
+        <div class="foot"><span class="num">${money(s.saved)} จาก ${money(g.target)}</span>
+          <span class="tag ${s.done ? 'good' : s.onTrack ? 'good' : 'bad'}">${s.done ? 'ถึงเป้าแล้ว' : s.onTrack ? 'ตามแผน' : 'ช้ากว่าแผน'}</span></div>
+        ${s.done ? '' : `<div class="foot col" style="margin-top:6px"><span>ต้องเก็บเดือนละ ${money(s.perMonth)} ให้ทัน ${mShort(g.deadline)}</span><span>3 เดือนหลังเก็บได้เฉลี่ย ${money(s.recent)}</span></div>`}
+      </button>`).join('')}
+    <button class="addline" id="addGoal">+ เพิ่มเป้าหมาย</button>
+    <p class="hint" style="text-align:center;margin-top:12px">ยอดออมนับจากรายจ่ายในหมวดที่ผูกกับเป้าหมาย</p>`;
+}
+
+/* ======================= main render ======================= */
+function render() {
+  applyLook(); renderSyncChip();
+  $('monthTitle').textContent = mTitle(S.month);
+  $('monthnav').style.visibility = ['plan', 'chat'].includes(S.tab) ? 'hidden' : 'visible';
+  document.body.classList.toggle('chatmode', S.tab === 'chat');
+  $('chatBar').hidden = S.tab !== 'chat';
+  $('tabs').innerHTML = TABS.map(([k, l]) => k === 'chat'
+    ? `<button class="center" data-tab="chat" ${S.tab === k ? 'aria-current="page"' : ''} aria-label="แชทบันทึกรายการ"><span class="orb">${icon('chat', 28)}</span>${l}</button>`
+    : `<button data-tab="${k}" ${S.tab === k ? 'aria-current="page"' : ''}>${icon(k)}${l}</button>`).join('');
+  const views = { home: viewHome, chat: viewChat, list: viewList, stats: viewStats, plan: viewPlan };
+  $('view').innerHTML = views[S.tab]();
+  if (S.tab === 'list') renderResults();
+  if (S.tab === 'chat') { renderHints(); requestAnimationFrame(() => window.scrollTo(0, document.body.scrollHeight)); }
+}
+function viewPlan() {
+  return `<div class="seg planseg" role="group" aria-label="หนี้หรือเป้าออม" style="margin-top:8px">
+    <button data-plan="debt" aria-pressed="${S.plan === 'debt'}">หนี้และการผ่อน</button><button data-plan="goal" aria-pressed="${S.plan === 'goal'}">เป้าออม</button></div>`
+    + (S.plan === 'debt' ? viewDebt() : viewGoal()).replace(/<h2 class="title">.*?<\/h2>/, '');
+}
+function go(tab) {
+  if (tab === 'debt' || tab === 'goal') { S.plan = tab; tab = 'plan'; }
+  S.tab = tab; S.openRow = null; store.set('fl-tab', tab); render(); if (tab !== 'chat') window.scrollTo(0, 0);
+}
+
+/* ======================= events ======================= */
+$('tabs').onclick = e => { const b = e.target.closest('[data-tab]'); if (b) go(b.dataset.tab); };
+$('prevM').onclick = () => { S.month = shiftM(S.month, -1); S.statSel = S.month; S.openRow = null; render(); };
+$('nextM').onclick = () => { S.month = shiftM(S.month, 1); S.statSel = S.month; S.openRow = null; render(); };
+document.addEventListener('click', e => {
+  const th = e.target.closest('#setTheme button');
+  if (th) { S.theme = th.dataset.theme; store.set('fl2-theme', S.theme); render(); return; }
+});
+
+$('view').addEventListener('click', e => {
+  const g = e.target.closest('[data-go]'); if (g) { go(g.dataset.go); return; }
+  const pl = e.target.closest('[data-plan]'); if (pl) { S.plan = pl.dataset.plan; render(); return; }
+  const jar = e.target.closest('[data-jar]'); if (jar) { S.f = { q: '', type: 'all', bucket: jar.dataset.jar, period: 'month' }; go('list'); return; }
+  const del = e.target.closest('[data-del]');
+  if (del) { commit([{ op: 'txDel', id: del.dataset.del }]); S.openRow = null; toast('ลบแล้ว'); render(); return; }
+  const row = e.target.closest('[data-id]');
+  if (row) {
+    S.openRow = S.openRow === row.dataset.id ? null : row.dataset.id;
+    document.querySelectorAll('.row-wrap').forEach(w => w.classList.toggle('open', w.querySelector('[data-id]').dataset.id === S.openRow));
+    return;
+  }
+  const fc = e.target.closest('[data-f]');
+  if (fc) { S.f[fc.dataset.f] = fc.dataset.v; document.querySelectorAll(`[data-f="${fc.dataset.f}"]`).forEach(b => b.setAttribute('aria-pressed', b === fc)); renderResults(); return; }
+  const sm = e.target.closest('[data-sm]'); if (sm) { S.statSel = sm.dataset.sm; render(); return; }
+  const dt = e.target.closest('[data-debt]'); if (dt) { openDebt(db.debts.find(d => d.id === dt.dataset.debt)); return; }
+  const gl = e.target.closest('[data-goal]'); if (gl) { openGoal(db.goals.find(x => x.id === gl.dataset.goal)); return; }
+  if (e.target.closest('#addDebt')) openDebt(null);
+  if (e.target.closest('#addGoal')) openGoal(null);
+});
+$('view').addEventListener('input', e => { if (e.target.id === 'q') { S.f.q = e.target.value; renderResults(); } });
+
+/* sheets */
+function openSheet(id) { $('scrim').classList.add('open'); $(id).classList.add('open'); }
+function closeSheets() { $('scrim').classList.remove('open'); document.querySelectorAll('.sheet').forEach(s => s.classList.remove('open')); }
+$('scrim').onclick = closeSheets;
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheets(); });
+
+/* add transaction */
+const draft = { type: 'expense', category: null, card: null, pay: store.get('fl3-pay', 'cash') };
+function renderPicker() {
+  ['Expense', 'Income', 'Cardpay'].forEach(k => $('t' + k).setAttribute('aria-pressed', draft.type === k.toLowerCase()));
+  const cards = cardsList();
+  if (draft.pay !== 'cash' && !cards.find(c => c.id === draft.pay)) draft.pay = 'cash';
+  if (draft.type === 'cardpay') {
+    const cs = cardState();
+    $('catPicker').innerHTML = `<div class="group-label">จ่ายบิลบัตรไหน</div>
+      <div class="chips">${cards.map(c => `<button class="chip" style="${bc('card')}" data-card="${esc(c.id)}" aria-pressed="${draft.card === c.id}">${esc(c.name)}</button>`).join('') || '<span class="hint">ยังไม่มีบัตร เพิ่มได้ที่แท็บหนี้</span>'}</div>
+      ${draft.card && cs.cards[draft.card] ? `<div class="infobox">
+        <div class="l"><span>ยอดรูดใหม่รอจ่าย</span><b class="num">${money(Math.max(0, cs.cards[draft.card].pending))}</b></div>
+        <div class="l"><span>หนี้เก่าคงเหลือ</span><b class="num">${money(cs.cards[draft.card].old)}</b></div>
+        ${cs.cards[draft.card].pending > 0 ? `<button class="quick" data-fill="${Math.round(cs.cards[draft.card].pending)}">ใส่ยอดเท่ายอดรูด</button>` : ''}
+        <span class="hint">จ่ายเท่ายอดรูดจะไม่นับเป็นรายจ่ายซ้ำ ส่วนที่จ่ายเกินจะนับเป็นการลดหนี้เก่าในก้อนบัตรเครดิต</span></div>` : ''}`;
+    $('payPicker').innerHTML = '';
+  } else {
+    const cats = CATS.filter(c => c.type === draft.type);
+    const groups = draft.type === 'income' ? [['', 'รายรับ']] : Object.keys(BUCKETS).map(k => [k, 'ก้อน' + BUCKETS[k].label]);
+    $('catPicker').innerHTML = groups.map(([k, label]) => {
+      const list = cats.filter(x => draft.type === 'income' || x.bucket === k);
+      return `<div class="group-label"><span class="dot" style="${bc(k)}"></span>${label}</div>
+        <div class="chips">${list.map(x => `<button class="chip" style="${bc(k)}" data-cat="${esc(x.name)}" aria-pressed="${draft.category === x.name}">${esc(x.name)}</button>`).join('')}</div>`;
+    }).join('');
+    $('payPicker').innerHTML = draft.type === 'expense' ? `<div class="group-label">จ่ายด้วย</div>
+      <div class="chips"><button class="chip" data-pay="cash" aria-pressed="${draft.pay === 'cash'}">💵 เงินสด/โอน</button>
+      ${cards.map(c => `<button class="chip" style="${bc('card')}" data-pay="${esc(c.id)}" aria-pressed="${draft.pay === c.id}">💳 ${esc(shortCard(c.id))}</button>`).join('')}</div>
+      ${isCard(draft.pay) ? '<p class="hint">รูดบัตร: นับในก้อนบัตรเครดิต</p>' : ''}` : '';
+  }
+  validate();
+}
+const amountVal = () => parseFloat($('amount').value.replace(/,/g, ''));
+function validate() { $('saveTx').disabled = !(amountVal() > 0 && (draft.type === 'cardpay' ? draft.card : draft.category)); }
+$('openAdd').onclick = () => {
+  draft.category = null; draft.card = null; $('amount').value = ''; $('note').value = ''; $('aiQuickText').value = '';
+  $('date').value = S.month === curMonth() ? todayStr() : S.month + '-01';
+  renderPicker(); openSheet('addSheet'); setTimeout(() => $('amount').focus(), 280);
+};
+$('tExpense').onclick = () => { draft.type = 'expense'; draft.category = null; renderPicker(); };
+$('tIncome').onclick = () => { draft.type = 'income'; draft.category = null; renderPicker(); };
+$('tCardpay').onclick = () => { draft.type = 'cardpay'; draft.card = cardsList().length === 1 ? cardsList()[0].id : null; renderPicker(); };
+$('catPicker').onclick = e => {
+  const b = e.target.closest('[data-cat]'); if (b) { draft.category = b.dataset.cat; renderPicker(); return; }
+  const c = e.target.closest('[data-card]'); if (c) { draft.card = c.dataset.card; renderPicker(); return; }
+  const f = e.target.closest('[data-fill]'); if (f) { $('amount').value = f.dataset.fill; validate(); }
+};
+$('payPicker').onclick = e => { const b = e.target.closest('[data-pay]'); if (b) { draft.pay = b.dataset.pay; store.set('fl3-pay', draft.pay); renderPicker(); } };
+$('amount').oninput = validate;
+$('saveTx').onclick = () => {
+  const date = $('date').value || todayStr();
+  const base = { id: 'l' + Date.now(), createdAt: new Date().toISOString(), date, month: date.slice(0, 7), amount: amountVal(), note: $('note').value.trim() };
+  let t;
+  if (draft.type === 'cardpay') t = { ...base, type: 'cardpay', card: draft.card, bucket: 'card', category: 'จ่ายบิล ' + cardName(draft.card) };
+  else {
+    const c = CATS.find(x => x.name === draft.category && x.type === draft.type);
+    t = { ...base, type: draft.type, bucket: c.bucket, category: c.name };
+    if (draft.type === 'expense') t.pay = draft.pay;
+  }
+  commit([{ op: 'tx', data: t }]);
+  let alert = '';
+  const affected = t.type === 'income' ? '' : effBucket(t);
+  if (affected) {
+    const b = summary(t.month).buckets[affected];
+    const level = b.pct >= 100 ? 100 : (b.pct >= db.alertPct ? db.alertPct : 0), key = `${t.month}:${affected}:${level}`;
+    if (level && !db.alerted[key]) {
+      db.alerted[key] = 1;
+      alert = level === 100 ? `🚨 ก้อน${b.label} เกินงบแล้ว ${money(-b.remaining)}` : `⚠️ ก้อน${b.label} ใช้ไป ${Math.round(b.pct)}% แล้ว`;
+    }
+  }
+  let msg = 'บันทึกแล้ว';
+  if (t.type === 'cardpay') { const a = cardState().alloc[t.id]; if (a) msg += `
+เคลียร์ยอดรูด ${money(a.cover)}${a.debt ? ` ลดหนี้เก่า ${money(a.debt)}` : ''}`; }
+  save(); closeSheets(); S.month = t.month;
+  toast(alert ? `${msg}
+${alert}` : msg, alert || t.type === 'cardpay' ? 4000 : 2000);
+  render();
+};
+
+/* debt & goal forms */
+let formSave = null, formDelete = null;
+function openForm(title, body, onSave, onDelete) {
+  $('formTitle').textContent = title; $('formBody').innerHTML = body;
+  formSave = onSave; formDelete = onDelete; $('formDelete').hidden = !onDelete;
+  openSheet('formSheet');
+}
+$('formSave').onclick = () => { const err = formSave(); if (err) { toast(err); return; } save(); closeSheets(); render(); };
+$('formDelete').onclick = () => { if (formDelete) { formDelete(); save(); closeSheets(); toast('ลบแล้ว'); render(); } };
+const catOptions = (buckets, selected) => CATS.filter(c => c.type === 'expense' && buckets.includes(c.bucket))
+  .map(c => `<option ${c.name === selected ? 'selected' : ''}>${esc(c.name)}</option>`).join('');
+const fv = id => $(id).value.trim(), fn = id => Number(String($(id).value).replace(/,/g, '')) || 0;
+
+function openDebt(d) {
+  const x = d || { kind: 'card', name: '', category: 'ผ่อน Shopee', balance: '', monthly: '', installments: '', startMonth: curMonth() };
+  let kind = x.kind || 'loan';
+  openForm(d ? 'แก้ไขหนี้' : 'เพิ่มหนี้', `
+    ${d ? '' : `<div class="seg" role="group" id="fKind"><button data-k="card">บัตรเครดิต</button><button data-k="loan">ผ่อนสินค้า / เงินกู้</button></div>`}
+    <label class="field">ชื่อ<input id="fName" value="${esc(x.name)}" placeholder="เช่น บัตรเครดิต SCB หรือ ผ่อนมือถือ"></label>
+    <label class="field" data-only="loan">หมวดที่ใช้บันทึกค่างวด<select id="fCat">${catOptions(['card', 'need'], x.category)}</select></label>
+    <div class="two"><label class="field"><span data-only="card">หนี้เก่าตอนเริ่ม</span><span data-only="loan">ยอดหนี้ตอนเริ่ม</span><input id="fBal" inputmode="decimal" value="${x.balance}"></label>
+      <label class="field"><span data-only="card">ลดหนี้เก่าเดือนละ</span><span data-only="loan">ค่างวดต่อเดือน</span><input id="fMon" inputmode="decimal" value="${x.monthly}"></label></div>
+    <div class="two"><label class="field" data-only="loan">จำนวนงวด (ถ้ามี)<input id="fInst" inputmode="numeric" value="${x.installments || ''}"></label>
+      <label class="field">เริ่มนับจากเดือน<input id="fStart" type="month" value="${x.startMonth}"></label></div>
+    <p class="hint" data-only="card">หลังเพิ่มบัตรแล้ว จะเลือกบัตรนี้ได้ในช่อง “จ่ายด้วย” ตอนบันทึกรายจ่าย</p>`,
+    () => {
+      if (!fv('fName') || !(fn('fBal') >= 0)) return 'ใส่ชื่อก่อนบันทึก';
+      const v = { kind, name: fv('fName'), balance: fn('fBal'), monthly: fn('fMon'), startMonth: fv('fStart') || curMonth() };
+      if (kind === 'loan') { if (!(v.balance > 0)) return 'ใส่ยอดหนี้ก่อนบันทึก'; v.category = fv('fCat'); v.installments = fn('fInst'); }
+      commit([{ op: 'debt', data: d ? { ...d, ...v } : { id: (kind === 'card' ? 'c' : 'd') + Date.now(), ...v } }]);
+    },
+    d ? () => { commit([{ op: 'debtDel', id: d.id }]); } : null);
+  const sync = () => {
+    document.querySelectorAll('#formBody [data-only]').forEach(el => el.hidden = el.dataset.only !== kind);
+    document.querySelectorAll('#fKind button').forEach(b => b.setAttribute('aria-pressed', b.dataset.k === kind));
+  };
+  if ($('fKind')) $('fKind').onclick = e => { const b = e.target.closest('[data-k]'); if (b) { kind = b.dataset.k; sync(); } };
+  sync();
+}
+function openGoal(g) {
+  const x = g || { name: '', category: 'เก็บเงินฉุกเฉิน', target: '', initial: '', deadline: shiftM(curMonth(), 6), startMonth: curMonth() };
+  openForm(g ? 'แก้ไขเป้าหมาย' : 'เพิ่มเป้าหมาย', `
+    <label class="field">ชื่อเป้าหมาย<input id="fName" value="${esc(x.name)}" placeholder="เช่น ทริปญี่ปุ่น"></label>
+    <label class="field">นับเงินจากหมวด<select id="fCat">${catOptions(['save', 'invest'], x.category)}</select></label>
+    <div class="two"><label class="field">เป้าหมาย (บาท)<input id="fTarget" inputmode="decimal" value="${x.target}"></label>
+      <label class="field">มีอยู่แล้ว<input id="fInit" inputmode="decimal" value="${x.initial}"></label></div>
+    <label class="field">อยากได้ภายในเดือน<input id="fDead" type="month" value="${x.deadline}"></label>`,
+    () => {
+      if (!fv('fName') || !(fn('fTarget') > 0)) return 'ใส่ชื่อและยอดเป้าหมายก่อนบันทึก';
+      if (!fv('fDead') || fv('fDead') <= curMonth()) return 'เลือกเดือนที่อยู่ในอนาคต';
+      const v = { name: fv('fName'), category: fv('fCat'), target: fn('fTarget'), initial: fn('fInit'), deadline: fv('fDead') };
+      commit([{ op: 'goal', data: g ? { ...g, ...v } : { id: 'g' + Date.now(), startMonth: curMonth(), ...v } }]);
+    },
+    g ? () => { commit([{ op: 'goalDel', id: g.id }]); } : null);
+}
+
+/* ======================= AI assistant ======================= */
+const AI = { sample: null, turns: [], ctl: null, busy: false };
+const AI_PROMPTS = [
+  { label: 'สรุปเดือนนี้', text: 'สรุปสถานะเงินเดือนนี้เทียบกับเป้า 40/20/20/20 ว่าก้อนไหนดี ก้อนไหนน่าห่วง และช่วงวันที่เหลือควรใช้วันละไม่เกินเท่าไร' },
+  { label: 'ซื้อของได้ไหม', fill: 'อยากซื้อ ... ราคา ... บาท จ่ายด้วย ... ได้ไหม' },
+  { label: 'ลดหนี้บัตรยังไงดี', text: 'ดูหนี้บัตรและรายการผ่อนทั้งหมด แล้วแนะนำลำดับการปิดหนี้ที่เหมาะกับงบบัตรเครดิต 20% ของฉัน พร้อมตัวเลขต่อเดือน' },
+  { label: 'วางแผนเดือนหน้า', text: 'วางแผนงบเดือนหน้าให้ตามเป้า 40/20/20/20 จากตัวเลข 3 เดือนหลัง บอกเป็นบาทว่าแต่ละก้อนควรมีเท่าไร และต้องปรับพฤติกรรมอะไรบ้าง' },
+];
+const AI_ERR = {
+  not_granted: 'ยังไม่ได้อนุญาตให้ใช้ AI ในหน้านี้', rate_limited: 'ถามถี่เกินไป รอสักครู่แล้วลองใหม่',
+  prompt_too_large: 'ข้อมูลยาวเกินไป ลองถามให้สั้นลง', refused: 'AI ตอบคำถามนี้ไม่ได้ ลองถามแบบอื่น',
+  session_expired: 'หมดเวลาเข้าสู่ระบบ ลองเปิดหน้านี้ใหม่',
+};
+const aiErr = e => AI_ERR[e && e.code] || 'AI ตอบไม่สำเร็จ ลองใหม่อีกครั้ง';
+function parseJsonLoose(t) {
+  const c = String(t).replace(/```json|```/g, '').trim();
+  try { return JSON.parse(c); } catch (e) {}
+  const a = c.indexOf('{'), b = c.lastIndexOf('}');
+  if (a >= 0 && b > a) { try { return JSON.parse(c.slice(a, b + 1)); } catch (e) {} }
+  throw Object.assign(new Error('invalid json'), { code: 'invalid_json', text: t });
+}
+function makeRemoteSample() {
+  const f = async (input, opts = {}) => {
+    const messages = typeof input === 'string' ? [{ role: 'user', content: input }] : input;
+    let r;
+    try { r = await api('ai', { messages, max_tokens: 1500 }); }
+    catch (e) { throw Object.assign(e, { code: e.net ? 'upstream_error' : 'refused' }); }
+    if (opts.onText) opts.onText({ text: r.text, delta: r.text });
+    return { text: r.text, truncated: false };
+  };
+  f.json = async (input, opts) => parseJsonLoose((await f(input, opts)).text);
+  return f;
+}
+function maybeRemoteAI() {
+  if (AI.sample && !AI.remote) return;                       // claude.ai viewer already gives us AI
+  if (connected() && SYNC.ai) { if (!AI.sample) { AI.sample = makeRemoteSample(); AI.remote = true; $('aiQuick').hidden = false; } }
+  else if (AI.remote) { AI.sample = null; AI.remote = false; $('aiQuick').hidden = true; }
+}
+(async () => {
+  try { if (window.claude && claude.use) AI.sample = await claude.use('sample'); } catch (e) { AI.sample = null; }
+  if (!AI.sample) maybeRemoteAI();
+  if (AI.sample) { $('aiQuick').hidden = false; if (S.tab === 'home' || S.tab === 'chat') render(); }
+})();
+
+function aiContext() {
+  const m = curMonth(), s = summary(m), cs = cardState(), r = Math.round;
+  const d = new Date(), dim = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+  const bucketsOf = h => Object.fromEntries(Object.values(h.buckets).map(b => [b.label, { สัดส่วน: b.ratio + '%', งบ: r(b.budget), ใช้ไป: r(b.spent), เหลือ: r(b.remaining) }]));
+  const byCat = {};
+  s.items.forEach(t => byCat[t.category] = (byCat[t.category] || 0) + t.amount);
+  return {
+    วันนี้: todayStr(), วันที่เหลือในเดือน: dim - d.getDate(),
+    เป้าหมาย: 'จำเป็น 40% บัตรเครดิตรวมทั้งหมด 20% ออมฉุกเฉิน 20% ลงทุน 20% ของรายรับเดือนนั้น',
+    กติกาก้อนบัตร: 'ยอดรูดบัตรทุกอย่าง ค่างวดผ่อน และเงินที่จ่ายลดหนี้เก่า นับในก้อนบัตรเครดิต จ่ายบิลเท่ายอดรูดไม่นับซ้ำ',
+    เดือนนี้: {
+      เดือน: mTitle(m), งบรวม: r(s.base), ที่มาของงบ: s.basis === 'expected' ? `เงินเดือนฐาน ${r(db.baseSalary)} + รายได้เสริมเฉลี่ย 3 เดือน ${r(s.avgVar)}` : 'รายรับจริง',
+      รายรับจริงที่เข้าแล้ว: r(s.income), ใช้ไปแล้ว: r(s.expense), คงเหลือตามงบ: r(s.left), ยอดรูดบัตรรอจ่ายบิล: r(s.pending),
+      ก้อน: bucketsOf(s),
+      หมวดที่จ่ายมากสุด: Object.entries(byCat).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([k, v]) => `${k} ${r(v)}`),
+    },
+    บัตรเครดิต: cardsList().map(c => ({ ชื่อ: c.name, หนี้เก่าคงเหลือ: r(cs.cards[c.id]?.old ?? c.balance), ยอดรูดรอจ่าย: r(Math.max(0, cs.cards[c.id]?.pending || 0)), ตั้งใจลดหนี้เก่าเดือนละ: r(c.monthly) })),
+    รายการผ่อน: db.debts.filter(x => x.kind !== 'card').map(x => { const st = debtStatus(x); return { ชื่อ: x.name, คงเหลือ: r(st.remaining), งวดละ: r(x.monthly) }; }),
+    เป้าออม: db.goals.map(g => { const st = goalStatus(g); return { ชื่อ: g.name, เก็บแล้ว: r(st.saved), เป้า: r(g.target), ต้องเก็บต่อเดือน: r(st.perMonth), ภายใน: mTitle(g.deadline) }; }),
+    ย้อนหลัง3เดือน: [3, 2, 1].map(i => { const h = summary(shiftM(m, -i)); return { เดือน: mTitle(h.month), รายรับ: r(h.income), ใช้จ่าย: r(h.expense), ก้อน: bucketsOf(h) }; }),
+  };
+}
+const AI_RULES = `คุณคือผู้ช่วยการเงินส่วนตัวในแอป "เงิน 4 ก้อน" ของผู้ใช้คนไทย
+เป้าหมายหลักของผู้ใช้: รายรับแต่ละเดือน (เงินเดือน + รายได้เสริม) แบ่งเป็น ค่าใช้จ่ายจำเป็น 40% ค่าใช้จ่ายบัตรเครดิตรวมทั้งหมด 20% เงินออมฉุกเฉิน 20% และเงินลงทุน 20%
+วิธีตอบ:
+- ตอบภาษาไทย กระชับ อ่านง่ายบนมือถือ ประมาณ 80-180 คำ เว้นแต่ผู้ใช้ขอละเอียด
+- ใช้ตัวเลขจากข้อมูลด้านล่างเท่านั้น ห้ามแต่งตัวเลขเอง ถ้าข้อมูลไม่พอให้บอกตรงๆ ว่าขาดอะไร
+- แนะนำเป็นการกระทำที่ทำได้จริง พร้อมจำนวนบาท เช่น "ค่าอาหารวันละไม่เกิน ฿150"
+- ถ้าก้อนไหนเกินงบหรือเสี่ยงเกิน ให้บอกตรงๆ อย่างสุภาพ แล้วเสนอทางแก้
+- ถ้าถามว่าซื้อของได้ไหม ให้ดูว่าจ่ายด้วยอะไร (รูดบัตรจะกินก้อนบัตรเครดิต) หลังซื้อก้อนนั้นเหลือเท่าไร แล้วสรุปว่า ได้ / ควรรอ / ไม่ควร พร้อมเหตุผล
+- เรื่องลงทุนให้แนะนำระดับหลักการ ไม่ระบุชื่อกองทุนหรือหุ้น
+- รูปแบบ: ข้อความธรรมดา ทำรายการด้วย "- " ได้ ใช้ **ตัวหนา** กับตัวเลขสำคัญได้ ห้ามใช้ตารางและหัวข้อ # ไม่ต้องทักทาย
+ข้อมูลการเงินของผู้ใช้ตอนนี้ (JSON):
+`;
+function mdLite(t) {
+  const lines = esc(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').split('\n');
+  let html = '', inList = false;
+  for (const ln of lines) {
+    const m = ln.match(/^\s*[-•]\s+(.*)/);
+    if (m) { if (!inList) { html += '<ul>'; inList = true; } html += `<li>${m[1]}</li>`; continue; }
+    if (inList) { html += '</ul>'; inList = false; }
+    html += ln.trim() ? `<div>${ln}</div>` : '<div style="height:6px"></div>';
+  }
+  return html + (inList ? '</ul>' : '');
+}
+function renderChat(extra = '') {
+  $('chat').innerHTML = AI.turns.map(t => `<div class="msg ${t.role === 'user' ? 'user' : 'ai'}">${t.role === 'user' ? esc(t.content) : mdLite(t.content)}</div>`).join('') + extra;
+  $('chat').scrollTop = $('chat').scrollHeight;
+  $('aiSend').textContent = AI.busy ? 'หยุด' : 'ส่ง';
+  $('aiSend').classList.toggle('stop', AI.busy);
+}
+function openAI(prompt) {
+  $('aiSuggest').innerHTML = AI_PROMPTS.map((q, i) => `<button class="chip" data-ai="${i}">${q.label}</button>`).join('');
+  if (!AI.turns.length) $('chat').innerHTML = '<div class="msg ai">ถามเรื่องเงินได้เลย เช่น เดือนนี้ใช้เกินไหม ซื้อของชิ้นนี้ได้หรือเปล่า หรือควรปิดหนี้ไหนก่อน</div>';
+  openSheet('aiSheet');
+  if (prompt) runPrompt(prompt);
+}
+function runPrompt(q) {
+  if (q.fill) { $('aiInput').value = q.fill; $('aiInput').focus(); const i = q.fill.indexOf('...'); $('aiInput').setSelectionRange(i, i + 3); return; }
+  askAI(q.text);
+}
+async function askAI(text) {
+  if (!AI.sample || AI.busy || !text.trim()) return;
+  AI.turns.push({ role: 'user', content: text.trim() });
+  AI.busy = true; AI.ctl = new AbortController();
+  renderChat('<div class="msg ai"><span class="thinking">กำลังคิด…</span></div>');
+  const convo = [{ role: 'user', content: AI_RULES + JSON.stringify(aiContext()) }, { role: 'assistant', content: 'รับทราบ พร้อมช่วยตามข้อมูลนี้' }, ...AI.turns.slice(-8)];
+  let live = '';
+  try {
+    const { text: answer } = await AI.sample(convo, {
+      cache: false, signal: AI.ctl.signal, modelTier: 'default',
+      onText: ({ text: t }) => { live = t; renderChat(`<div class="msg ai">${mdLite(t)}</div>`); },
+    });
+    AI.turns.push({ role: 'assistant', content: answer });
+    AI.busy = false; renderChat();
+  } catch (e) {
+    AI.busy = false;
+    const keep = e && e.text ? e.text : live;
+    if (keep) AI.turns.push({ role: 'assistant', content: keep + (e.code === 'cancelled' ? '\n(หยุดแล้ว)' : '') });
+    else AI.turns.pop();
+    renderChat(e && e.code === 'cancelled' ? '' : `<div class="msg ai err">${aiErr(e)}</div>`);
+    if (e && e.code === 'not_granted') { AI.sample = null; $('aiQuick').hidden = true; }
+  }
+}
+$('aiSend').onclick = () => {
+  if (AI.busy) { AI.ctl?.abort(); return; }
+  const v = $('aiInput').value; $('aiInput').value = ''; askAI(v);
+};
+$('aiInput').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); $('aiSend').click(); } });
+$('aiSuggest').onclick = e => { const b = e.target.closest('[data-ai]'); if (b) runPrompt(AI_PROMPTS[b.dataset.ai]); };
+$('view').addEventListener('click', e => { const b = e.target.closest('#aiCard [data-ai]'); if (b) openAI(AI_PROMPTS[b.dataset.ai]); });
+
+/* AI quick add: free text → filled form (user still confirms) */
+$('aiQuickBtn').onclick = async () => {
+  const text = $('aiQuickText').value.trim();
+  if (!AI.sample || !text) return;
+  const btn = $('aiQuickBtn'); btn.disabled = true; btn.textContent = 'กำลังอ่าน…';
+  const y = new Date(Date.now() - 864e5), yest = `${y.getFullYear()}-${pad(y.getMonth() + 1)}-${pad(y.getDate())}`;
+  const prompt = `แปลงข้อความของผู้ใช้เป็นรายการบันทึกรายรับรายจ่าย 1 รายการ
+ตอบเป็น JSON อย่างเดียว รูปแบบ {"type":"expense"|"income"|"cardpay","category":"ชื่อหมวดตรงตามรายการ","pay":"cash" หรือ id บัตร,"card":id บัตร หรือ null,"amount":ตัวเลข,"date":"YYYY-MM-DD","note":"คำอธิบายสั้น"}
+- type "cardpay" ใช้เมื่อเป็นการจ่ายบิลบัตรเครดิต ให้ใส่ card และ category เป็น ""
+- หมวดรายจ่าย: ${CATS.filter(c => c.type === 'expense').map(c => c.name).join(', ')}
+- หมวดรายรับ: ${CATS.filter(c => c.type === 'income').map(c => c.name).join(', ')}
+- บัตรที่มี: ${cardsList().map(c => `${c.id} = ${c.name}`).join(', ') || 'ไม่มี'}
+- ถ้าไม่บอกวิธีจ่าย ใช้ pay "${draft.pay}"
+- วันนี้ ${todayStr()} เมื่อวาน ${yest} ถ้าไม่บอกวันให้ใช้วันนี้
+- ถ้าแปลงไม่ได้ ตอบ {"error":"เหตุผลสั้นๆ"}
+ข้อความ: ${text}`;
+  try {
+    const r = await AI.sample.json(prompt, { modelTier: 'quick' });
+    if (!r || r.error) { toast(r && r.error ? r.error : 'อ่านข้อความไม่ออก ลองพิมพ์ใหม่'); return; }
+    const type = ['expense', 'income', 'cardpay'].includes(r.type) ? r.type : 'expense';
+    draft.type = type;
+    if (type === 'cardpay') draft.card = isCard(r.card) ? r.card : null;
+    else {
+      const c = CATS.find(x => x.type === type && x.name === r.category);
+      draft.category = c ? c.name : (type === 'expense' ? 'อื่นๆ' : 'รายได้อื่น');
+      if (type === 'expense') draft.pay = isCard(r.pay) ? r.pay : 'cash';
+    }
+    if (Number(r.amount) > 0) $('amount').value = Number(r.amount);
+    if (/^\d{4}-\d{2}-\d{2}$/.test(r.date || '')) $('date').value = r.date;
+    $('note').value = String(r.note || '').slice(0, 200);
+    renderPicker();
+    toast('กรอกให้แล้ว ตรวจแล้วกดบันทึก');
+  } catch (e) {
+    toast(e && e.code === 'invalid_json' ? 'อ่านข้อความไม่ออก ลองพิมพ์ใหม่' : aiErr(e));
+    if (e && e.code === 'not_granted') { AI.sample = null; $('aiQuick').hidden = true; }
+  } finally { btn.disabled = false; btn.textContent = 'กรอกให้'; }
+};
+
+/* ======================= chat logger ======================= */
+if (!db.chat) db.chat = [];
+const CHAT_HINTS = ['ข้าว 45 กาแฟ 60 รูดกสิกร', 'เมื่อวาน เติมน้ำมัน 300', 'วันนี้ใช้ไปเท่าไร', 'เดือนนี้เหลือเท่าไร'];
+const KW = {
+  'ค่าอาหาร': ['ข้าว', 'อาหาร', 'กิน', 'กาแฟ', 'ชา', 'น้ำ', 'ขนม', 'ก๋วยเตี๋ยว', 'ส้มตำ', 'มื้อ', 'หมูกระทะ', 'ชาบู', 'เซเว่น', '7-11'],
+  'ค่าเดินทาง': ['น้ำมัน', 'รถ', 'bts', 'mrt', 'แท็กซี่', 'grab', 'วิน', 'ทางด่วน', 'จอดรถ'],
+  'ค่าไฟบ้าน': ['ค่าไฟ'], 'ค่าโทรศัพท์': ['โทรศัพท์', 'เน็ต', 'มือถือ'], 'ค่าประกันสังคม': ['ประกันสังคม'], 'ค่ากองทุน': ['ค่ากองทุน'],
+  'ค่าเปย์แฟน': ['แฟน'], 'ของใช้/ช้อปปิ้ง': ['ของใช้', 'ช้อป', 'เสื้อ', 'lazada', 'ลาซาด้า', 'ซื้อของ'],
+  'บัตรกดเงินสด กสิกร': ['กดเงินสด'], 'ผ่อน เฟิร์สช้อยส์': ['เฟิร์ส', 'firstchoice'], 'ผ่อน Shopee': ['shopee', 'ช้อปปี้'],
+  'เก็บออมระยะยาว': ['ออมระยะยาว'], 'เก็บพัฒนาตัวเอง': ['พัฒนา', 'คอร์ส'], 'เก็บเงินฉุกเฉิน': ['ฉุกเฉิน', 'เก็บเงิน', 'ออม'],
+  'ซื้อกองทุน': ['ซื้อกองทุน', 'dca'], 'ซื้อหุ้น': ['หุ้น'],
+  'เงินเดือน': ['เงินเดือน'], 'ค่าคอมซ่อม': ['คอมซ่อม'], 'ค่าคอมขาย': ['คอมขาย', 'ค่าคอม', 'คอม'], 'ค่าเดินทาง+เบี้ยเลี้ยง': ['เบี้ยเลี้ยง'],
+};
+const dateShift = n => { const d = new Date(Date.now() + n * 864e5); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; };
+const cardWords = () => cardsList().map(c => ({ id: c.id, words: [c.id.toLowerCase(), shortCard(c.id).toLowerCase()].filter(Boolean) }));
+function findCard(txt) {
+  const l = txt.toLowerCase();
+  const hit = cardWords().find(c => c.words.some(w => w && l.includes(w)));
+  if (hit) return hit.id;
+  if (/รูด|บัตร/.test(l)) return isCard(draft.pay) ? draft.pay : (cardsList()[0] || {}).id || null;
+  return null;
+}
+function findCat(txt, type) {
+  const l = txt.toLowerCase(), terms = [];
+  CATS.filter(c => c.type === type).forEach(c => { terms.push([c.name.toLowerCase(), c.name]); (KW[c.name] || []).forEach(k => terms.push([k, c.name])); });
+  terms.sort((a, b) => b[0].length - a[0].length);
+  const hit = terms.find(([k]) => l.includes(k));
+  return hit ? hit[1] : null;
+}
+/* rule-based parser: works without AI (and mirrors what the LINE backend does) */
+function localParse(text) {
+  let date = todayStr();
+  if (/เมื่อวานซืน/.test(text)) date = dateShift(-2); else if (/เมื่อวาน/.test(text)) date = dateShift(-1);
+  const items = [];
+  const re = /(\d{1,3}(?:,\d{3})+|\d+)(\.\d+)?\s*(k|พัน)?/gi;
+  let m, last = 0;
+  const payRe = /^\s*(รูด\S*|บัตร\S*|จ่าย(?:ด้วย)?(?:บัตร)?\s*\S*|เงินสด|โอน|สด)/i;
+  while ((m = re.exec(text))) {
+    let label = text.slice(last, m.index);
+    const prev = items[items.length - 1];
+    const pm = label.match(payRe);
+    if (prev && pm && !/จ่ายบิล/.test(pm[0])) {           // "…60 รูดกสิกร ข้าวเย็น 120": pay words belong to the previous item
+      if (prev.type === 'expense') prev.pay = /เงินสด|โอน|สด/.test(pm[0]) ? 'cash' : (findCard(pm[0]) || prev.pay);
+      label = label.slice(pm[0].length);
+    }
+    last = m.index + m[0].length;
+    const amount = parseFloat(m[1].replace(/,/g, '') + (m[2] || '')) * (m[3] ? 1000 : 1);
+    const lab = label.replace(/เมื่อวานซืน|เมื่อวาน|วันนี้|บาท|฿|[,\n]/g, ' ').trim();
+    if (!(amount > 0)) continue;
+    if (/จ่ายบิล|จ่ายบัตร|ชำระบัตร/.test(lab)) { items.push({ type: 'cardpay', card: findCard(lab), amount, date, note: '' }); continue; }
+    let type = /^\+|รายได้|ได้เงิน|เข้า/.test(lab) || findCat(lab, 'income') && !findCat(lab, 'expense') ? 'income' : 'expense';
+    const cat = findCat(lab, type) || (type === 'income' ? 'รายได้อื่น' : 'อื่นๆ');
+    const it = { type, category: cat, amount, date, note: lab.replace(/^\+/, '').slice(0, 60) };
+    if (type === 'expense') {
+      const c = findCard(lab), inst = (CATS.find(x => x.name === cat) || {}).bucket === 'card';
+      it.pay = c && (inst ? /รูด/.test(lab) : /รูด|บัตร|กสิกร|กรุงศรี/i.test(lab)) ? c : 'cash';
+    }
+    items.push(it);
+  }
+  // trailing pay words after the last number
+  const tail = text.slice(last), pm = tail.match(payRe), lastIt = items[items.length - 1];
+  if (lastIt && lastIt.type === 'expense' && pm) lastIt.pay = /เงินสด|โอน|สด/.test(pm[0]) ? 'cash' : (findCard(pm[0]) || lastIt.pay);
+  return items;
+}
+function normItems(list) {
+  return (Array.isArray(list) ? list : []).map(r => {
+    const type = ['expense', 'income', 'cardpay'].includes(r.type) ? r.type : 'expense';
+    const amount = Math.round(Number(r.amount) * 100) / 100;
+    if (!(amount > 0)) return null;
+    const date = /^\d{4}-\d{2}-\d{2}$/.test(r.date || '') ? r.date : todayStr();
+    if (type === 'cardpay') { const card = isCard(r.card) ? r.card : (cardsList()[0] || {}).id; return card ? { type, card, amount, date, note: String(r.note || '') } : null; }
+    const c = CATS.find(x => x.type === type && x.name === r.category);
+    const it = { type, category: c ? c.name : (type === 'income' ? 'รายได้อื่น' : 'อื่นๆ'), amount, date, note: String(r.note || '').slice(0, 80) };
+    if (type === 'expense') it.pay = isCard(r.pay) ? r.pay : 'cash';
+    return it;
+  }).filter(Boolean);
+}
+function localAnswer(text) {
+  const s = summary(curMonth());
+  if (/วันนี้/.test(text)) {
+    const t = txOf(curMonth()).filter(x => x.date === todayStr() && x.type === 'expense');
+    return t.length ? `วันนี้ใช้ไป **${money(sum(t))}** จาก ${t.length} รายการ` : 'วันนี้ยังไม่มีรายจ่ายที่บันทึกไว้';
+  }
+  if (/เหลือ|สรุป|เดือนนี้|ยอด/.test(text)) {
+    return [`เดือนนี้ใช้ได้อีก **${money(s.left)}** จากงบ ${money(s.base)}`,
+      ...Object.values(s.buckets).map(b => `- ${b.label} ${b.remaining < 0 ? 'เกินงบ ' + money(-b.remaining) : 'เหลือ ' + money(b.remaining)}`)].join('\n');
+  }
+  return null;
+}
+const hhmm = iso => { const d = new Date(iso); return `${pad(d.getHours())}:${pad(d.getMinutes())}`; };
+function itemBadge(it) {
+  const b = it.type === 'income' ? '' : it.type === 'cardpay' ? 'card' : (isCard(it.pay) ? 'card' : (CATS.find(c => c.name === it.category) || {}).bucket);
+  const ic = it.type === 'income' ? '💰' : it.type === 'cardpay' ? '🧾' : BUCKETS[(CATS.find(c => c.name === it.category) || {}).bucket || 'need'].ic;
+  return `<span class="badge" style="${bc(b)}" aria-hidden="true">${ic}</span>`;
+}
+function catSelect(it, mi, ii) {
+  if (it.type === 'cardpay') return `<select data-edit="card" data-m="${mi}" data-i="${ii}" aria-label="บัตร">${cardsList().map(c => `<option value="${esc(c.id)}" ${c.id === it.card ? 'selected' : ''}>จ่ายบิล ${esc(c.name)}</option>`).join('')}</select>`;
+  const groups = it.type === 'income' ? [['รายรับ', CATS.filter(c => c.type === 'income')]]
+    : Object.keys(BUCKETS).map(k => [BUCKETS[k].label, CATS.filter(c => c.type === 'expense' && c.bucket === k)]);
+  return `<select data-edit="category" data-m="${mi}" data-i="${ii}" aria-label="หมวด">${groups.map(([g, l]) => `<optgroup label="${g}">${l.map(c => `<option ${c.name === it.category ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</optgroup>`).join('')}
+    ${it.type === 'expense' ? '<optgroup label="เปลี่ยนเป็น"><option value="__income">↺ เป็นรายรับ</option></optgroup>' : '<optgroup label="เปลี่ยนเป็น"><option value="__expense">↺ เป็นรายจ่าย</option></optgroup>'}</select>`;
+}
+function paySelect(it, mi, ii) {
+  if (it.type !== 'expense') return `<span class="d">${it.type === 'income' ? 'รายรับ' : 'ไม่นับซ้ำยอดรูด'}</span>`;
+  return `<select data-edit="pay" data-m="${mi}" data-i="${ii}" aria-label="จ่ายด้วย"><option value="cash" ${it.pay === 'cash' ? 'selected' : ''}>💵 เงินสด/โอน</option>
+    ${cardsList().map(c => `<option value="${esc(c.id)}" ${it.pay === c.id ? 'selected' : ''}>💳 ${esc(shortCard(c.id))}</option>`).join('')}</select>`;
+}
+const dShort = d => d === todayStr() ? 'วันนี้' : d === dateShift(-1) ? 'เมื่อวาน' : dayTitle(d);
+function draftCard(msg, mi) {
+  const items = msg.items || [];
+  const total = sum(items.filter(i => i.type === 'expense'));
+  if (msg.status === 'draft') {
+    return `<div class="draft"><div class="dh"><b>พบ ${items.length} รายการ</b><span class="muted">ตรวจแล้วกดบันทึก</span></div>
+      ${items.map((it, ii) => `<div class="ditem">${itemBadge(it)}${catSelect(it, mi, ii)}
+        <input inputmode="decimal" value="${it.amount}" data-edit="amount" data-m="${mi}" data-i="${ii}" aria-label="จำนวนเงิน">
+        <button class="x" data-rm="${ii}" data-m="${mi}" aria-label="ลบรายการนี้">✕</button>
+        <div class="sub">${paySelect(it, mi, ii)}<span class="d">${dShort(it.date)}${it.note ? ' ' + esc(it.note) : ''}</span></div></div>`).join('')}
+      <div class="foot2"><span class="tot">${total ? `รายจ่ายรวม <b class="num">${money(total)}</b>` : ''}</span>
+        <button class="go" data-save="${mi}" ${items.length ? '' : 'disabled'}>บันทึกทั้งหมด</button></div></div>`;
+  }
+  return `<div class="draft${msg.status === 'undone' ? ' undone' : ''}"><div class="dh"><b>${msg.status === 'undone' ? '↩︎ ยกเลิกแล้ว' : '✅ บันทึกแล้ว'} ${items.length} รายการ</b>
+      ${msg.status === 'saved' ? `<button class="ghost" data-undo="${mi}">ยกเลิก</button>` : ''}</div>
+    ${items.map(it => `<div class="ditem saved">${itemBadge(it)}<span class="nm">${esc(it.type === 'cardpay' ? 'จ่ายบิล ' + cardName(it.card) : it.category)}<small>${it.type === 'expense' && isCard(it.pay) ? '💳 ' + esc(shortCard(it.pay)) + ' ' : ''}${dShort(it.date)}${it.note ? ' ' + esc(it.note) : ''}</small></span>
+      <span class="am">${it.type === 'income' ? '+' : ''}${money(it.amount)}</span></div>`).join('')}
+    ${msg.after && msg.status === 'saved' ? `<div class="after">${msg.after.map(l => `<span>${esc(l)}</span>`).join('')}</div>` : ''}</div>`;
+}
+function viewChat() {
+  let lastDay = '', html = '';
+  db.chat.forEach((msg, mi) => {
+    const day = msg.ts.slice(0, 10);
+    if (day !== lastDay) { html += `<div class="chatday">${dShort(day)}</div>`; lastDay = day; }
+    if (msg.role === 'me') html += `<div class="bubble me">${esc(msg.text)}<span class="time">${hhmm(msg.ts)}</span></div>`;
+    else {
+      if (msg.text) html += `<div class="bubble bot${msg.err ? ' err' : ''}">${mdLite(msg.text)}</div>`;
+      if (msg.items) html += draftCard(msg, mi);
+    }
+  });
+  if (CHAT.busy) html += `<div class="bubble bot" aria-label="กำลังอ่านรายการ"><span class="typing"><i></i><i></i><i></i></span></div>`;
+  const s = summary(curMonth());
+  const today = sum(txOf(curMonth()).filter(x => x.type === 'expense' && x.date === todayStr()));
+  const jars = Object.values(s.buckets).map(b => {
+    const lv = b.budget > 0 ? Math.max(0, Math.min(1, b.remaining / b.budget)) : 0;
+    return `<span class="${b.remaining < 0 ? 'over' : ''}" style="${bc(b.key)}" title="${b.label}"><i style="height:${(lv * 100).toFixed(0)}%"></i></span>`;
+  }).join('');
+  const EX = [['ข้าวเช้า 45 กาแฟ 60 รูดกสิกร ข้าวเย็น 120', 'หลายรายการในข้อความเดียว'], ['เมื่อวาน เติมน้ำมัน 300', 'บันทึกย้อนหลัง'], ['เงินคอมเข้า 3000', 'รายรับ'], ['จ่ายบิลกสิกร 2500', 'จ่ายบิลบัตร ไม่นับซ้ำยอดรูด']];
+  const intro = `<div class="welcome"><div class="h">วันนี้ใช้อะไรไปบ้าง?</div>
+    <p>พิมพ์เล่าได้เหมือนแชทกับเพื่อน ระบบจะแยกหมวด ก้อน และวิธีจ่ายให้ ตรวจแล้วกดบันทึกครั้งเดียว</p>
+    <div class="ex">${EX.map(([t, d]) => `<button data-hint="${esc(t)}">${esc(t)}<small>${d}</small></button>`).join('')}</div></div>`;
+  return `<div class="cstat"><button class="box" data-go="home" aria-label="ดูภาพรวม">
+      <div><div class="k">วันนี้ใช้ไป</div><div class="v num">${money(today)}</div></div>
+      <div><div class="k">เหลือใช้เดือนนี้</div><div class="v num${s.left < 0 ? ' neg' : ''}">${money(s.left)}</div></div>
+      <div class="minijars" aria-hidden="true">${jars}</div></button></div>
+    <p class="mode">${AI.sample ? '✨ AI ช่วยแยกรายการ' : 'แยกรายการจากคำที่พิมพ์'}</p>
+    <div class="chatlog" id="chatlog">${db.chat.length ? '' : intro}${html}</div>`;
+}
+function renderHints() {
+  const last = db.chat[db.chat.length - 1];
+  const list = !db.chat.length ? [] : last && last.status === 'saved' ? ['วันนี้ใช้ไปเท่าไร', 'เดือนนี้เหลือเท่าไร', 'กาแฟ 60'] : CHAT_HINTS;
+  $('chatHints').innerHTML = list.map(h => `<button class="chip" data-hint="${esc(h)}">${esc(h)}</button>`).join('');
+}
+const CHAT = { busy: false };
+function pushChat(m) { db.chat.push({ ts: new Date().toISOString(), ...m }); if (db.chat.length > 150) db.chat = db.chat.slice(-150); save(); }
+async function sendChat() {
+  const text = $('chatText').value.trim();
+  if (!text || CHAT.busy) return;
+  $('chatText').value = ''; autoGrow();
+  pushChat({ role: 'me', text });
+  CHAT.busy = true; render();
+  let items = [], reply = '';
+  try {
+    if (AI.sample) {
+      const recent = db.chat.slice(-7, -1).filter(m => m.role === 'me' || m.text).map(m => (m.role === 'me' ? 'ผู้ใช้: ' : 'ระบบ: ') + (m.text || '')).join('\n');
+      const prompt = `คุณคือระบบบันทึกรายรับรายจ่ายในแอป "เงิน 4 ก้อน" ผู้ใช้พิมพ์เล่าว่าใช้จ่ายหรือได้รับเงินอะไรบ้าง หรือถามคำถาม
+ตอบเป็น JSON อย่างเดียว: {"items":[{"type":"expense"|"income"|"cardpay","category":"ชื่อหมวดตรงตามรายการ","pay":"cash" หรือ id บัตร,"card":id บัตรหรือ null,"amount":ตัวเลข,"date":"YYYY-MM-DD","note":"คำที่ผู้ใช้พิมพ์สั้นๆ"}],"reply":"ข้อความตอบกลับสั้นๆ ภาษาไทย"}
+กติกา:
+- แยกทุกรายการที่มีจำนวนเงิน รายการละ 1 object ห้ามรวม
+- หมวดรายจ่าย: ${CATS.filter(c => c.type === 'expense').map(c => c.name).join(', ')}
+- หมวดรายรับ: ${CATS.filter(c => c.type === 'income').map(c => c.name).join(', ')}
+- บัตรเครดิต: ${cardsList().map(c => `${c.id} = ${c.name}`).join(', ') || 'ไม่มี'} คำว่า "รูด" หรือชื่อธนาคารหมายถึงจ่ายด้วยบัตรนั้น ถ้าไม่บอกวิธีจ่ายใช้ "cash"
+- "จ่ายบิลบัตร/จ่ายบัตร..." คือ type "cardpay" ใส่ card และ category เป็น ""
+- วันนี้ ${todayStr()} เมื่อวาน ${dateShift(-1)} เมื่อวานซืน ${dateShift(-2)} ถ้าไม่บอกวันใช้วันนี้
+- ถ้ามีรายการที่ไม่รู้จำนวนเงิน ไม่ต้องใส่ใน items แต่ถามกลับใน reply
+- ถ้าเป็นคำถาม ให้ items เป็น [] แล้วตอบใน reply โดยใช้ตัวเลขจากข้อมูลด้านล่างเท่านั้น กระชับ ใช้ "- " ทำรายการได้
+- ถ้าบันทึกรายการได้ครบ reply ให้เป็น "" ได้
+บทสนทนาล่าสุด:
+${recent || '-'}
+ข้อมูลการเงินตอนนี้: ${JSON.stringify(aiContext())}
+ข้อความใหม่ของผู้ใช้: ${text}`;
+      const hasNum = /\d/.test(text);
+      const r = await AI.sample.json(prompt, { modelTier: hasNum ? 'quick' : 'default', cache: false });
+      items = normItems(r && r.items); reply = String((r && r.reply) || '');
+    } else {
+      items = localParse(text).map(i => normItems([i])[0]).filter(Boolean);
+      if (!items.length) reply = localAnswer(text) || 'ยังหาจำนวนเงินในข้อความไม่เจอ ลองพิมพ์แบบ “ข้าว 60 กาแฟ 45” หรือถามว่า “เดือนนี้เหลือเท่าไร”';
+    }
+    pushChat({ role: 'bot', text: reply, items: items.length ? items : undefined, status: items.length ? 'draft' : undefined });
+  } catch (e) {
+    if (e && e.code === 'not_granted') { AI.sample = null; $('aiQuick').hidden = true; }
+    const fb = localParse(text).map(i => normItems([i])[0]).filter(Boolean);
+    pushChat(fb.length ? { role: 'bot', text: 'AI ไม่ตอบ ใช้ตัวแยกพื้นฐานแทน ตรวจรายการก่อนบันทึกนะครับ', items: fb, status: 'draft' }
+                       : { role: 'bot', text: aiErr(e), err: true });
+  } finally { CHAT.busy = false; render(); autoGrow(); }
+}
+function saveDraft(mi) {
+  const msg = db.chat[mi]; if (!msg || msg.status !== 'draft') return;
+  const ids = [], touched = new Set(), now = Date.now(), ops = [];
+  msg.items.forEach((it, i) => {
+    const base = { id: 'c' + now + '_' + i, createdAt: new Date(now + i).toISOString(), date: it.date, month: it.date.slice(0, 7), amount: it.amount, note: it.note || '' };
+    let t;
+    if (it.type === 'cardpay') t = { ...base, type: 'cardpay', card: it.card, bucket: 'card', category: 'จ่ายบิล ' + cardName(it.card) };
+    else { const c = CATS.find(x => x.name === it.category && x.type === it.type); t = { ...base, type: it.type, bucket: c.bucket, category: c.name }; if (it.type === 'expense') t.pay = it.pay || 'cash'; }
+    ops.push({ op: 'tx', data: t }); ids.push(t.id);
+    if (t.type !== 'income') touched.add(t.month + '|' + effBucket(t));
+  });
+  commit(ops);
+  const after = [];
+  touched.forEach(k => {
+    const [m, b] = k.split('|'), bb = summary(m).buckets[b];
+    after.push(`ก้อน${bb.label}${m !== curMonth() ? ' (' + mShort(m) + ')' : ''} ${bb.remaining < 0 ? 'เกินงบ ' + money(-bb.remaining) + ' 🚨' : 'เหลือ ' + money(bb.remaining) + (bb.pct >= db.alertPct ? ' ⚠️' : '')}`);
+  });
+  const todaySpend = sum(txOf(curMonth()).filter(x => x.type === 'expense' && x.date === todayStr()));
+  if (todaySpend) after.push(`วันนี้ใช้ไปรวม ${money(todaySpend)}`);
+  msg.status = 'saved'; msg.savedIds = ids; msg.after = after;
+  save(); render(); toast(`บันทึกแล้ว ${ids.length} รายการ`);
+}
+function undoDraft(mi) {
+  const msg = db.chat[mi]; if (!msg || msg.status !== 'saved') return;
+  const ids = new Set(msg.savedIds || []);
+  commit([...ids].map(id => ({ op: 'txDel', id })));
+  msg.status = 'undone'; save(); render(); toast('ยกเลิกแล้ว');
+}
+function autoGrow() {
+  const t = $('chatText'); t.style.height = 'auto'; t.style.height = Math.min(140, t.scrollHeight) + 'px';
+  const has = !!t.value.trim(); $('chatSend').disabled = !has || CHAT.busy; $('chatBar').classList.toggle('typing-now', has);
+}
+$('chatText').addEventListener('input', autoGrow);
+$('chatText').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); sendChat(); } });
+$('chatSend').onclick = sendChat;
+$('view').addEventListener('click', e => { const b = e.target.closest('.welcome [data-hint]'); if (b) { $('chatText').value = b.dataset.hint; autoGrow(); $('chatText').focus(); } });
+$('formBtn').onclick = () => $('openAdd').click();
+$('chatHints').onclick = e => { const b = e.target.closest('[data-hint]'); if (b) { $('chatText').value = b.dataset.hint; autoGrow(); $('chatText').focus(); } };
+$('view').addEventListener('click', e => {
+  const sv = e.target.closest('[data-save]'); if (sv) { saveDraft(Number(sv.dataset.save)); return; }
+  const un = e.target.closest('[data-undo]'); if (un) { undoDraft(Number(un.dataset.undo)); return; }
+  const rm = e.target.closest('[data-rm]');
+  if (rm) { const msg = db.chat[rm.dataset.m]; msg.items.splice(Number(rm.dataset.rm), 1); if (!msg.items.length) msg.status = 'undone'; save(); render(); }
+});
+$('view').addEventListener('change', e => {
+  const el = e.target.closest('[data-edit]'); if (!el) return;
+  const it = db.chat[el.dataset.m].items[el.dataset.i], f = el.dataset.edit;
+  if (f === 'amount') { const v = parseFloat(el.value.replace(/,/g, '')); if (v > 0) it.amount = v; }
+  else if (f === 'category' && el.value === '__income') { it.type = 'income'; it.category = findCat(it.note, 'income') || 'รายได้อื่น'; delete it.pay; }
+  else if (f === 'category' && el.value === '__expense') { it.type = 'expense'; it.category = findCat(it.note, 'expense') || 'อื่นๆ'; it.pay = 'cash'; }
+  else it[f] = el.value;
+  save(); render();
+});
+
+/* settings */
+function renderRatios() {
+  $('ratioInputs').innerHTML = Object.keys(BUCKETS).map(k => `<label>${BUCKETS[k].label}<input inputmode="numeric" maxlength="3" data-r="${k}" value="${db.ratios[k]}"></label>`).join('');
+  $('alertPct').value = db.alertPct; $('baseSalary').value = db.baseSalary || ''; sumRatios();
+}
+function sumRatios() {
+  const t = [...document.querySelectorAll('[data-r]')].reduce((s, i) => s + (Number(i.value) || 0), 0);
+  $('ratioSum').textContent = t === 100 ? 'รวม 100%' : `รวม ${t}% ต้องปรับให้เท่ากับ 100%`;
+  $('saveRatios').disabled = t !== 100;
+}
+$('ratioInputs').oninput = sumRatios;
+$('openSettings').onclick = () => { renderRatios(); renderModeBox(); openSheet('setSheet'); };
+$('syncChip').onclick = () => { if (connected()) syncNow(); else $('openSettings').click(); };
+$('saveRatios').onclick = () => {
+  const ratios = {}; document.querySelectorAll('[data-r]').forEach(i => ratios[i.dataset.r] = Number(i.value) || 0);
+  commit([{ op: 'settings', data: { ratios, alertPct: Number($('alertPct').value) || 90, baseSalary: Number($('baseSalary').value.replace(/,/g, '')) || 0 } }]);
+  closeSheets(); toast('บันทึกงบประมาณแล้ว'); render();
+};
+$('clearChat').onclick = () => { db.chat = []; save(); closeSheets(); toast('ล้างประวัติแชทแล้ว'); render(); };
+$('resetDemo').onclick = () => { if (connected()) return; db = seed(); save(); closeSheets(); S.month = curMonth(); toast('สร้างข้อมูลตัวอย่างใหม่แล้ว'); render(); };
+function renderModeBox() {
+  const n = outbox.get().length;
+  $('modeBox').innerHTML = connected()
+    ? `<b>☁︎ เชื่อม Google Sheet แล้ว</b><span class="muted">${SYNC.last ? 'ซิงค์ล่าสุด ' + new Date(SYNC.last).toLocaleString('th-TH', { dateStyle: 'short', timeStyle: 'short' }) : 'ยังไม่เคยซิงค์'}${n ? ` รอส่ง ${n} รายการ` : ''}</span>${SYNC.msg ? `<span style="color:var(--warn-ink)">${esc(SYNC.msg)}</span>` : ''}`
+    : db.mode === 'demo' ? '<b>🧪 ข้อมูลตัวอย่าง</b><span class="muted">ลองเล่นได้เต็มที่ เมื่อพร้อมใช้จริงให้เชื่อม Google Sheet หรือกดเริ่มใช้จริงในเครื่องนี้</span>'
+    : '<b>📱 เก็บในเครื่องนี้</b><span class="muted">ข้อมูลอยู่ในเบราว์เซอร์นี้เท่านั้น ถ้าล้างเบราว์เซอร์หรือเปลี่ยนเครื่องข้อมูลจะหาย แนะนำให้เชื่อม Google Sheet</span>';
+  $('cfgUrl').value = cfg.url; $('cfgToken').value = cfg.token;
+  $('connectBtn').textContent = connected() ? 'บันทึกการเชื่อมต่อ' : 'เชื่อมต่อ Google Sheet';
+  $('syncNowBtn').hidden = !connected(); $('disconnectBtn').hidden = !connected();
+  $('startReal').hidden = connected() || db.mode !== 'demo'; $('resetDemo').hidden = connected();
+  const inClaude = !!window.claude && !connected();          // claude.ai pages cannot reach outside sites
+  $('connectBtn').disabled = inClaude;
+  if (inClaude) $('modeBox').insertAdjacentHTML('beforeend', '<span class="muted">ลิงก์บน claude.ai เชื่อม Google Sheet ไม่ได้ ใช้แอปที่วางบน GitHub Pages ตามคู่มือเพื่อเชื่อม Sheet</span>');
+}
+$('connectBtn').onclick = async () => {
+  const url = $('cfgUrl').value.trim(), token = $('cfgToken').value.trim();
+  if (!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(url)) { toast('URL ต้องเป็นลิงก์ Web app ที่ลงท้ายด้วย /exec'); return; }
+  if (!token) { toast('ใส่ API token ก่อน'); return; }
+  const prev = cfg; cfg = { url, token };
+  const btn = $('connectBtn'); btn.disabled = true; btn.textContent = 'กำลังเชื่อมต่อ…';
+  try {
+    const d = await api('pull');
+    const localReal = db.mode === 'local' && db.tx.length && !prev.url;
+    if (localReal && !d.tx.length && confirm(`ส่งข้อมูล ${db.tx.length} รายการในเครื่องนี้ขึ้น Google Sheet ด้วยไหม`)) {
+      outbox.set([...db.tx.map(t => ({ op: 'tx', data: t })), ...db.debts.map(x => ({ op: 'debt', data: x })), ...db.goals.map(x => ({ op: 'goal', data: x })),
+                  { op: 'settings', data: { ratios: db.ratios, alertPct: db.alertPct, baseSalary: db.baseSalary } }]);
+    } else if (!prev.url) outbox.set([]);
+    if (db.mode === 'demo') db.chat = [];
+    store.set('fl-cfg', cfg); closeSheets(); toast('เชื่อมต่อแล้ว กำลังดึงข้อมูล');
+    await syncNow();
+  } catch (e) { cfg = prev; toast(e.message); }
+  finally { btn.disabled = false; renderModeBox(); renderSyncChip(); }
+};
+$('syncNowBtn').onclick = () => { closeSheets(); syncNow(); };
+$('disconnectBtn').onclick = () => {
+  if (outbox.get().length && !confirm('ยังมีรายการที่ยังไม่ได้ส่งขึ้น Sheet ถ้าเลิกเชื่อมต่อรายการเหล่านี้จะอยู่แค่ในเครื่อง ต่อไหม')) return;
+  cfg = { url: '', token: '' }; store.set('fl-cfg', cfg); outbox.set([]); db.mode = 'local'; save(); SYNC.state = 'none'; SYNC.ai = false;
+  if (AI.remote) { AI.sample = null; AI.remote = false; }
+  closeSheets(); toast('เลิกเชื่อมต่อแล้ว ข้อมูลยังอยู่ในเครื่อง'); render();
+};
+$('startReal').onclick = () => {
+  if (!confirm('ลบข้อมูลตัวอย่างทั้งหมด แล้วเริ่มบันทึกจริงในเครื่องนี้?')) return;
+  db = emptyDb(); save(); closeSheets(); S.month = curMonth(); toast('เริ่มใช้งานจริงแล้ว ตั้งยอดหนี้บัตรได้ที่แท็บหนี้/ออม'); render();
+};
+
+/* PWA */
+let installEvt = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; $('installBtn').hidden = false; });
+$('installBtn').onclick = async () => { if (!installEvt) return; installEvt.prompt(); await installEvt.userChoice; installEvt = null; $('installBtn').hidden = true; };
+if ('serviceWorker' in navigator) { try { navigator.serviceWorker.register('sw.js').catch(() => {}); } catch (e) {} }
+if (connected()) scheduleSync(50);
+
+render();
+</script>
+</body>
+</html>
