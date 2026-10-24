@@ -1,6 +1,6 @@
 // Service worker: เปิดแอปได้แม้ไม่มีเน็ต (ข้อมูลจริงยังดึงจาก Google Sheet)
-const CACHE = 'finance-life-v2';
-const SHELL = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
+const CACHE = 'money-life-v5-1';
+const SHELL = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)));
